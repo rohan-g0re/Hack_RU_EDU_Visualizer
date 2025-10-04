@@ -127,8 +127,8 @@ Netlify will use the `netlify.toml` configuration automatically. Ensure it exist
 3. Connect your GitHub repository
 4. Configure build settings:
    - **Build command**: `npm run build`
-   - **Publish directory**: `dist`
-   - **Base directory**: (leave empty)
+   - **Publish directory**: `frontend/dist`
+   - **Base directory**: `frontend`
 5. Click **"Deploy site"**
 
 #### Option B: Through Netlify CLI

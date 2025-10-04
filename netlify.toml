@@ -5,10 +5,10 @@
   command = "npm run build"
   
   # Directory with the build output
-  publish = "dist"
+  publish = "frontend/dist"
   
   # Base directory
-  base = "."
+  base = "frontend"
 
 # Build environment variables (these will be set in Netlify UI)
 [build.environment]

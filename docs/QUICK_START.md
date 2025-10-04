@@ -76,7 +76,13 @@ You should see:
 
 ## Step 4: Configure Frontend
 
-In the **root directory** (not backend), create or update `.env`:
+In the **frontend directory**, create or update `.env`:
+
+```bash
+cd frontend
+```
+
+Create/edit `frontend/.env`:
 
 ```env
 # Supabase (PUBLIC keys only!)
@@ -97,6 +103,7 @@ VITE_STRIPE_PRICE_ONETIME=price_...
 In a **new terminal**, from the root directory:
 
 ```bash
+cd frontend
 npm install  # if you haven't already
 npm run dev
 ```
