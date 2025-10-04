@@ -30,6 +30,7 @@ export async function generateSvgVisualizationWithGemini({ text, type }: Visuali
 
     const prompt = `You are an expert at creating precise, technical SVG visualizations optimized for digital displays.
     
+    visualization_type: ${type}
     requirements:
     1. Fixed dimensions: width="700" height="480" viewBox="0 0 700 480"
     2. Create a good looking and technical SVG such that it will help the user quickly understand the concept in it.
@@ -221,18 +222,7 @@ Format your response as valid JSON with this structure:
   }
 }
 
-/**
- * Helper function to convert ArrayBuffer to Base64
- */
-function arrayBufferToBase64(buffer: ArrayBuffer): string {
-  let binary = '';
-  const bytes = new Uint8Array(buffer);
-  const len = bytes.byteLength;
-  for (let i = 0; i < len; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  return Buffer.from(binary, 'binary').toString('base64');
-}
+// Removed unused helper function to satisfy noUnusedLocals
 
 /**
  * Extract text from a PDF file using Gemini

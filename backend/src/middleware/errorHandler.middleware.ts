@@ -7,10 +7,13 @@ import { ErrorResponse } from '../types/api.types';
  */
 export const errorHandler = (
   error: Error,
-  req: Request,
+  _req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void => {
+  // Mark intentionally unused parameters to satisfy noUnusedParameters
+  void _req;
+  void _next;
   console.error('Error:', error);
 
   // Default error response
@@ -41,8 +44,10 @@ export const errorHandler = (
 export const notFoundHandler = (
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): void => {
+  // Mark intentionally unused parameter to satisfy noUnusedParameters
+  void _next;
   res.status(404).json({
     error: 'Not Found',
     message: `Route ${req.method} ${req.path} not found`,
