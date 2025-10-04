@@ -144,82 +144,24 @@ export function useConceptExtraction() {
     return Object.values(conceptsByText);
   };
 
-  // Helper function to extract concepts with text ranges
+  // Helper function to extract concepts with text ranges via backend API
   const extractConceptsWithRanges = async (text: string): Promise<ConceptWithRange[]> => {
     try {
       setIsExtracting(true);
       
-      // Use Gemini 2.0 Flash model to extract concepts and their positions
-      const { GoogleGenerativeAI } = await import('@google/generative-ai');
-      const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
+      // Use backend API to extract concepts with positions
+      const { apiClient } = await import('../services/api/apiClient');
+      const response = await apiClient.extractConceptsWithRanges(text);
       
-      // Use Gemini 2.0 Flash model
-      const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
-      
-      const prompt = `Analyze the following text and identify the important concepts or technical topics with their positions:
-
-${text}
-
-Pay special attention to:
-1. Algorithmic processes and workflows
-2. Data structures and their relationships
-3. System architectures and components
-4. Mathematical models and their parameters
-5. Statistical relationships and correlations
-6. Technical hierarchies and taxonomies
-
-Rules:
-1. Only extract concepts that are actually present in the text
-2. For short text with only one concept, return just that single concept
-3. For longer text, extract only the important concepts (max 5-7)
-4. Do not invent or add concepts that aren't directly found in the text
-5. Make sure to identify COMPLETE words and phrases, not partial ones
-6. The startOffset and endOffset must capture entire words, not parts of words
-7. Ensure concepts DO NOT overlap with each other
-8. Do not extract the same concept multiple times
-9. Avoid extracting concepts that are too similar to each other
-
-For each concept:
-1. Provide a concise title (max 4-5 words)
-2. Write a 1-2 sentence description explaining the concept
-3. Identify the startOffset (character position where this concept starts in the original text)
-4. Identify the endOffset (character position where this concept ends in the original text)
-
-Format your response as valid JSON with this structure:
-[{
-  "title": "concept title", 
-  "description": "concept description", 
-  "startOffset": number, 
-  "endOffset": number
-}]`;
-      
-      const result = await model.generateContent(prompt);
-      const response = await result.response;
-      const responseText = response.text();
-      
-      // Extract the JSON from the response
-      const jsonMatch = responseText.match(/\[[\s\S]*\]/);
-      
-      if (!jsonMatch) {
-        throw new Error('No valid JSON found in the response');
-      }
-      
-      let concepts: ConceptWithRange[] = JSON.parse(jsonMatch[0]);
+      let validConcepts = response.concepts;
       
       // Validate the response
-      if (!Array.isArray(concepts) || concepts.length === 0) {
+      if (!Array.isArray(validConcepts) || validConcepts.length === 0) {
         throw new Error('Invalid concept extraction response');
       }
       
       // Ensure all concepts have the required fields and adjust text boundaries
-      let validConcepts = concepts
-        .filter(c => 
-          typeof c.title === 'string' && 
-          typeof c.description === 'string' && 
-          typeof c.startOffset === 'number' && 
-          typeof c.endOffset === 'number'
-        )
-        .map(concept => validateConceptRange(text, concept));
+      validConcepts = validConcepts.map(concept => validateConceptRange(text, concept));
       
       // Process the concepts further to eliminate duplicates and overlaps
       validConcepts = resolveOverlappingConcepts(validConcepts, text);

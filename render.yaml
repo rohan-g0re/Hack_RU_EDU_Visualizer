@@ -1,0 +1,45 @@
+# Render Blueprint for Nous.AI Backend
+services:
+  - type: web
+    name: nous-ai-backend
+    env: node
+    region: oregon
+    buildCommand: cd backend && npm install && npm run build
+    startCommand: cd backend && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_KEY
+        sync: false
+      - key: SUPABASE_JWT_SECRET
+        sync: false
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        sync: false
+    healthCheckPath: /api/health
+    
+    # Auto-deploy on push to main
+    autoDeploy: true
+    
+    # Scaling configuration
+    plan: starter # Change to 'standard' or 'pro' for production
+    
+    # Instance configuration
+    numInstances: 1
+
+# Note: You'll need to set the environment variables in the Render Dashboard
+# after deploying. Go to your service -> Environment tab and add:
+# - SUPABASE_URL (from your Supabase project settings)
+# - SUPABASE_SERVICE_KEY (from Supabase API settings - service_role key)
+# - SUPABASE_JWT_SECRET (from Supabase JWT Secret in API settings)
+# - ANTHROPIC_API_KEY (from Anthropic console)
+# - GEMINI_API_KEY (from Google AI Studio)
+# - CORS_ORIGIN (your Netlify frontend URL, e.g., https://your-app.netlify.app)
+

@@ -1,0 +1,74 @@
+# Netlify Configuration for Nous.AI Frontend
+
+[build]
+  # Build command
+  command = "npm run build"
+  
+  # Directory with the build output
+  publish = "dist"
+  
+  # Base directory
+  base = "."
+
+# Build environment variables (these will be set in Netlify UI)
+[build.environment]
+  NODE_VERSION = "18"
+
+# Redirect rules for Single Page Application
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    
+    # Cache control for static assets
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/index.html"
+  [headers.values]
+    # Don't cache the HTML file
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+# Environment-specific settings
+[context.production]
+  # Production environment
+  [context.production.environment]
+    VITE_NODE_ENV = "production"
+
+[context.deploy-preview]
+  # Deploy preview environment (for pull requests)
+  [context.deploy-preview.environment]
+    VITE_NODE_ENV = "staging"
+
+[context.branch-deploy]
+  # Branch deploy environment
+  [context.branch-deploy.environment]
+    VITE_NODE_ENV = "development"
+
+# Plugin configuration (optional)
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  # Lighthouse plugin configuration for performance monitoring
+  [plugins.inputs]
+    output_path = "lighthouse-reports"
+
+# Note: You'll need to set the following environment variables in Netlify:
+# Go to Site settings -> Environment variables and add:
+# - VITE_SUPABASE_URL (from your Supabase project settings)
+# - VITE_SUPABASE_ANON_KEY (from Supabase API settings - anon public key)
+# - VITE_BACKEND_API_URL (your Render backend URL, e.g., https://nous-ai-backend.onrender.com)
+# - VITE_STRIPE_PUBLISHABLE_KEY (from Stripe dashboard)
+# - VITE_STRIPE_PRICE_SUBSCRIPTION (Stripe subscription price ID)
+# - VITE_STRIPE_PRICE_ONETIME (Stripe one-time price ID)
+

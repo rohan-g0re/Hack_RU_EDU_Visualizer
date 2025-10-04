@@ -17,7 +17,7 @@ import { ToastProvider, useToast } from './contexts/ToastContext';
 import UserMenu from './components/auth/UserMenu';
 import CreditDisplay from './components/payments/CreditDisplay';
 import PaymentModal from './components/payments/PaymentModal';
-import { PAYMENT_PLANS } from '../../constants/payments';
+import { PAYMENT_PLANS } from './constants/payments';
 
 function AppContent() {
   // Get state and handlers from contexts
