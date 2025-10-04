@@ -1,0 +1,46 @@
+# VizKidd.AI Requirements
+
+# Core Framework
+react==18.3.1
+react-dom==18.3.1
+typescript==5.5.3
+
+# Build Tools
+vite==5.4.2
+@vitejs/plugin-react==4.3.1
+
+# AI Integration
+@anthropic-ai/sdk==0.39.0
+@google/generative-ai==0.2.1
+
+# PDF Processing
+react-pdf==9.2.1
+pdfjs-dist==4.10.38
+@react-pdf/renderer==4.3.0
+
+# UI Components & Styling
+tailwindcss==3.4.1
+@tailwindcss/typography==0.5.16
+lucide-react==0.344.0
+react-dropzone==14.2.3
+
+# Diagram Rendering
+mermaid==10.9.0
+
+# Development Tools
+eslint==9.9.1
+@eslint/js==9.9.1
+eslint-plugin-react-hooks==5.1.0-rc.0
+eslint-plugin-react-refresh==0.4.11
+typescript-eslint==8.3.0
+
+# Build & PostCSS
+postcss==8.4.35
+autoprefixer==10.4.18
+
+# Type Definitions
+@types/react==18.3.5
+@types/react-dom==18.3.0
+
+# Node.js Version
+# Requires Node.js 18+ 

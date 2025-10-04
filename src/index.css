@@ -1,0 +1,591 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+  
+  html,
+  body {
+    @apply bg-[#0A192F] text-white antialiased;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  #root {
+    @apply min-h-screen flex flex-col;
+  }
+  
+  /* Typography improvements */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold leading-tight;
+    font-family: 'Manrope', sans-serif;
+  }
+}
+
+/* Background effects */
+.bg-vignette {
+  background: radial-gradient(circle, transparent 50%, rgba(10, 14, 23, 0.7) 100%);
+}
+
+/* Animation classes */
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+  
+  .animate-slideIn {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+  
+  .animate-slide-in-right {
+    animation: slideInRight 0.3s ease-out forwards;
+  }
+  
+  .animate-pulse-subtle {
+    animation: pulseSubtle 2s ease-in-out;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
+  }
+  
+  .animate-ping-slow {
+    animation: pingSlow 1.5s cubic-bezier(0, 0, 0.2, 1) infinite;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounceSubtle 1s ease-in-out infinite;
+  }
+  
+  /* Animation delay utilities for landing page */
+  .animation-delay-2000 {
+    animation-delay: 2s;
+  }
+  
+  .animation-delay-4000 {
+    animation-delay: 4s;
+  }
+  
+  /* Landing page animation classes */
+  .animate-fadeIn {
+    animation: fadeIn 1s forwards;
+  }
+  
+  .animate-slideUp {
+    animation: slideUp 1s forwards;
+  }
+  
+  .animation-delay-300 {
+    animation-delay: 300ms;
+  }
+  
+  .animation-delay-500 {
+    animation-delay: 500ms;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+  
+  @keyframes slideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+  
+  @keyframes slideInRight {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes pulseSubtle {
+    0% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0; }
+  }
+  
+  @keyframes pulseSlow {
+    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(56, 189, 248, 0.4); }
+    70% { transform: scale(1.05); box-shadow: 0 0 0 10px rgba(56, 189, 248, 0); }
+    100% { transform: scale(1); }
+  }
+  
+  @keyframes pingSlow {
+    0% { transform: scale(0.8); opacity: 0.8; }
+    75%, 100% { transform: scale(1.5); opacity: 0; }
+  }
+  
+  @keyframes bounceSubtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-2px); }
+  }
+}
+
+/* Custom scrollbar styling */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(30, 58, 95, 0.3);
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.3);
+  border-radius: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(56, 189, 248, 0.5);
+}
+
+/* Styling for concept highlights */
+.concept-highlight {
+  position: relative;
+  transition: all 0.2s;
+  @apply border-b border-transparent;
+}
+
+.concept-highlight:hover {
+  @apply bg-[#38BDF8]/10 border-b border-[#38BDF8]/30;
+  cursor: pointer;
+}
+
+.concept-highlight.active {
+  @apply bg-blue-500/20 border-b-2 border-blue-500;
+}
+
+/* Style for temporary highlights in formatted text */
+.temp-highlight {
+  @apply bg-blue-500/20 border-b-2 border-blue-500 transition-colors duration-300;
+}
+
+/* Glassmorphism cards */
+.glass-card {
+  @apply bg-[#112240]/80 backdrop-blur-md rounded-2xl shadow-xl border border-blue-800/20;
+}
+
+/* Website-style text formatting */
+.website-text-container {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 16px;
+}
+
+/* Main title styling */
+.website-text-container h1 {
+  font-size: 1.9rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #38BDF8;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+/* Section heading styling */
+.website-text-container h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 1.8rem;
+  margin-bottom: 0.8rem;
+  color: #38BDF8;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+/* Sub-section heading styling */
+.website-text-container h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+  color: #38BDF8;
+  letter-spacing: -0.01em;
+}
+
+/* Date and metadata styling */
+.last-updated {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 1.8rem;
+  font-style: italic;
+}
+
+/* Paragraph styling */
+.website-text-container p {
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+
+/* Links styling */
+.website-text-container a {
+  color: #38BDF8;
+  text-decoration: none;
+  transition: all 0.2s;
+  border-bottom: 1px dotted rgba(56, 189, 248, 0.4);
+}
+
+.website-text-container a:hover {
+  color: #64D3FF;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.8);
+}
+
+/* List styling */
+.website-text-container ul, .website-text-container ol {
+  margin: 1rem 0 1.5rem 1.5rem;
+}
+
+.website-text-container li {
+  margin-bottom: 0.5rem;
+}
+
+.website-text-container ul {
+  list-style-type: disc;
+}
+
+.website-text-container ul ul {
+  list-style-type: circle;
+  margin-top: 0.3rem;
+}
+
+/* Code styling */
+.website-text-container code {
+  background: rgba(10, 25, 47, 0.7);
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+  color: #64D3FF;
+}
+
+.website-text-container pre {
+  background: rgba(10, 25, 47, 0.7);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.2rem 0;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.website-text-container pre code {
+  background: transparent;
+  padding: 0;
+  color: #e2e8f0;
+}
+
+/* Blockquote styling */
+.website-text-container blockquote {
+  border-left: 3px solid #38BDF8;
+  padding-left: 1rem;
+  margin: 1.5rem 0 1.5rem 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+}
+
+/* Table styling */
+.website-text-container table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.95em;
+}
+
+.website-text-container th {
+  background: rgba(30, 58, 95, 0.5);
+  color: #fff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.75rem 1rem;
+}
+
+.website-text-container td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(56, 189, 248, 0.1);
+}
+
+.website-text-container tr:nth-child(even) {
+  background: rgba(10, 25, 47, 0.3);
+}
+
+/* Highlight specific content */
+.website-text-container .highlight {
+  background: linear-gradient(90deg, rgba(56, 189, 248, 0.15) 0%, rgba(56, 189, 248, 0.05) 100%);
+  padding: 0.1em 0.3em;
+  border-radius: 0.2em;
+  color: #fff;
+}
+
+/* Image styling */
+.website-text-container img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Figure and caption */
+.website-text-container figure {
+  margin: 1.5rem 0;
+}
+
+.website-text-container figcaption {
+  text-align: center;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-top: 0.5rem;
+  font-style: italic;
+}
+
+/* Technical term styling */
+.technical-term {
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* Bold text styling */
+.website-text-container strong {
+  font-weight: 600;
+  color: #94E2D5;
+}
+
+/* Quoted text styling */
+.quoted-text {
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* Paper title styling */
+.paper-title {
+  font-style: italic;
+  color: #fff;
+}
+
+/* Formatted text styles */
+.website-text-container em {
+  font-style: italic;
+  color: #A5E3FC;
+}
+
+/* Formatted text container styles */
+.formatted-text-container {
+  line-height: 1.6;
+}
+
+.formatted-text-container h1,
+.formatted-text-container h2,
+.formatted-text-container h3,
+.formatted-text-container h4,
+.formatted-text-container h5,
+.formatted-text-container h6 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  font-weight: 600;
+  color: #38BDF8;
+}
+
+.formatted-text-container p {
+  margin-bottom: 1em;
+}
+
+.formatted-text-container ul,
+.formatted-text-container ol {
+  margin-left: 1.5em;
+  margin-bottom: 1em;
+}
+
+.formatted-text-container strong,
+.formatted-text-container b {
+  font-weight: 600;
+  color: #8DEBFF;
+}
+
+.formatted-text-container blockquote {
+  border-left: 3px solid #38BDF8;
+  padding-left: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: 1em;
+  color: #8DEBFF;
+}
+
+.formatted-text-container .temp-highlight {
+  background-color: rgba(56, 189, 248, 0.2);
+  border-bottom: 2px solid #38BDF8;
+  padding: 2px 0;
+  transition: background-color 0.3s ease;
+}
+
+/* Highlight parent element for better visibility */
+.formatted-text-container .concept-parent-highlight {
+  background-color: rgba(56, 189, 248, 0.05);
+  border-left: 3px solid rgba(56, 189, 248, 0.5);
+  padding-left: 12px;
+  margin-left: -15px;
+  border-radius: 0 4px 4px 0;
+  position: relative;
+}
+
+/* Add smooth transition for highlight changes */
+.formatted-text-container .temp-highlight,
+.formatted-text-container .concept-parent-highlight {
+  transition: all 0.5s ease-in-out;
+}
+
+/* Highlighted concepts in formatted text */
+.formatted-text-container .highlighted-concept {
+  border-bottom: 2px solid #38BDF8;
+  cursor: pointer;
+  padding: 0 2px;
+  transition: border-color 0.3s ease;
+}
+
+.formatted-text-container .highlighted-concept:hover {
+  border-bottom: 2px solid #64D3FF;
+}
+
+.formatted-text-container .highlighted-concept.active {
+  border-bottom: 2px solid #8DEBFF;
+  font-weight: 500;
+}
+
+/* Voice Assistant Answer Styling */
+.answer-content p {
+  margin-bottom: 0.75rem;
+}
+
+.answer-content p:last-child {
+  margin-bottom: 0;
+}
+
+.answer-content strong {
+  color: #64D3FF;
+  font-weight: 600;
+}
+
+.answer-content em {
+  font-style: italic;
+  color: #A5E3FC;
+}
+
+.answer-content ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+  padding-left: 0.25rem;
+}
+
+.answer-content ul li {
+  position: relative;
+  margin-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.answer-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.answer-content li {
+  margin-bottom: 0.25rem;
+}
+
+.answer-content li::marker {
+  color: #64D3FF;
+}
+
+.answer-content code {
+  padding: 0.2rem 0.4rem;
+  background-color: rgba(56, 189, 248, 0.1);
+  border-radius: 0.25rem;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+/* Math Formula Animation */
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0.2; transform: scale(0.9); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0) rotate(0); }
+  50% { transform: translateY(-10px) rotate(5deg); }
+  100% { transform: translateY(0) rotate(0); }
+}
+
+@keyframes pulse-glow {
+  0% { filter: drop-shadow(0 0 2px currentColor); }
+  50% { filter: drop-shadow(0 0 10px currentColor) drop-shadow(0 0 15px rgba(16, 185, 129, 0.6)); }
+  100% { filter: drop-shadow(0 0 2px currentColor); }
+}
+
+@keyframes radar-ping {
+  0% { transform: scale(0.2); opacity: 0.7; }
+  70% { transform: scale(1); opacity: 0.2; }
+  100% { transform: scale(1.2); opacity: 0; }
+}
+
+.formula-float {
+  animation: float 8s ease-in-out infinite;
+  animation-delay: var(--float-delay, 0s);
+}
+
+.formula-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+  animation-delay: var(--glow-delay, 0s);
+}
+
+.radar-ping {
+  animation: radar-ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes contentFadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.content-fade-in {
+  opacity: 0;
+  animation: contentFadeIn 0.8s ease-out forwards;
+  animation-delay: 2.5s; /* Match the timing of formula animation completion */
+}
+
+/* Add these to your existing styles */
+
+.animate-slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
