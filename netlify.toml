@@ -5,7 +5,7 @@
   command = "npm run build"
   
   # Directory with the build output
-  publish = "frontend/dist"
+  publish = "dist"
   
   # Base directory
   base = "frontend"
