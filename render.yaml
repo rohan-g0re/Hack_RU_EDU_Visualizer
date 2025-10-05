@@ -1,4 +1,4 @@
-# Render Blueprint for Nous.AI Backend
+# Render Blueprint for VizKidd Backend
 services:
   - type: web
     name: vizkidd-backend

@@ -1,6 +1,6 @@
-# Nous.AI Backend API
+# VizKidd Backend API
 
-Secure backend API for Nous.AI that handles AI service calls and protects API keys.
+Secure backend API for VizKidd that handles AI service calls and protects API keys.
 
 ## Features
 

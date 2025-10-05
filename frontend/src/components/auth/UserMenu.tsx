@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { User, LogOut, Settings, ChevronDown } from 'lucide-react';
+import { User, LogOut, ChevronDown } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface UserMenuProps {
@@ -32,7 +32,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onProfileClick }) => {
   const getInitials = () => {
     if (user.user_metadata?.full_name) {
       const names = user.user_metadata.full_name.split(' ');
-      return names.map(n => n[0]).join('').toUpperCase().slice(0, 2);
+      return names.map((n: string) => n[0]).join('').toUpperCase().slice(0, 2);
     }
     return user.email?.[0]?.toUpperCase() || 'U';
   };
@@ -49,10 +49,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onProfileClick }) => {
           {getInitials()}
         </div>
         
-        {/* User Email (hidden on mobile) */}
-        <span className="hidden md:inline text-white/90 text-sm max-w-[150px] truncate">
-          {user.email}
-        </span>
         
         {/* Chevron Icon */}
         <ChevronDown 
@@ -110,7 +106,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ onLogout, onProfileClick }) => {
           {/* Footer */}
           <div className="p-3 bg-[#0A192F] border-t border-blue-800/30">
             <p className="text-gray-500 text-xs text-center">
-              Nous.AI © 2025
+              VizKidd © 2025
             </p>
           </div>
         </div>
