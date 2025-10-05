@@ -374,7 +374,7 @@ function App() {
     <AuthProvider>
       <ToastProvider>
         <AppProvider initialShowLandingPage={initialLandingPageState} onVisitedMain={() => localStorage.setItem('hasVisitedMain', 'true')}>
-          <ConceptProvider>
+          <ConceptProvider onShowPaymentModal={() => setShowPaymentModal(true)}>
             <VoiceProvider>
               <AppContent />
             </VoiceProvider>

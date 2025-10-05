@@ -25,7 +25,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
     clearError();
 
     // Validation
-    if (!email || !password || !confirmPassword) {
+    if (!fullName || !email || !password || !confirmPassword) {
       setLocalError('Please fill in all required fields');
       return;
     }
@@ -121,10 +121,10 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
 
         {/* Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name Field (Optional) */}
+          {/* Full Name Field */}
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
-              Full Name <span className="text-gray-500 text-xs">(optional)</span>
+              Full Name
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -137,6 +137,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
                 placeholder="John Doe"
                 disabled={isSubmitting}
                 autoComplete="name"
+                required
               />
             </div>
           </div>
