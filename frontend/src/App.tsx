@@ -139,9 +139,9 @@ function AppContent() {
 
   // Handle payment selection
   const handleSelectPlan = async (planId: 'subscription' | 'onetime') => {
-    showToast('Payment integration coming soon!', 'info');
-    // TODO: Integrate Stripe Checkout
-    setShowPaymentModal(false);
+    // Payment is now handled directly in PaymentModal with Stripe Elements
+    // This callback is kept for backward compatibility
+    console.log('Payment plan selected:', planId);
   };
 
   // If About page is active, show it

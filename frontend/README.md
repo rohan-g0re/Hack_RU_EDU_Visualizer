@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # VizKidd Frontend
 
 React + TypeScript + Vite frontend application for educational text visualization.
@@ -173,3 +174,5 @@ npm run build
 
 MIT
 
+=======
+>>>>>>> dc9f900 (stripe payments working)
