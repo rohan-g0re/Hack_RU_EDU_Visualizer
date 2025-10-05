@@ -10,7 +10,7 @@ interface LoginPageProps {
 
 const LoginPage: React.FC<LoginPageProps> = ({ onSwitchToSignup, onClose }) => {
   const { signIn, loading, error, clearError } = useAuth();
-  const { showToast } = useToast();
+  const { showToast, showCenteredModal } = useToast();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [localError, setLocalError] = useState('');
@@ -37,7 +37,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onSwitchToSignup, onClose }) => {
       await signIn(email, password);
       // On success, close modal - the auth context will update
       // and user will be redirected to main app automatically
-      showToast('Welcome back!', 'success');
+      showCenteredModal('Welcome to VizKidd!', 'success');
       setTimeout(() => {
         onClose();
       }, 500);

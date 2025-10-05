@@ -6,19 +6,24 @@ interface HeaderProps {
   title?: string;
   isMobileMenuOpen: boolean;
   toggleMobileMenu: () => void;
+  onLogoClick?: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  title = 'Nous.AI',
+  title = 'VizKidd',
   isMobileMenuOpen,
   toggleMobileMenu,
+  onLogoClick,
 }) => {
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex items-center">
-            <div className="flex-shrink-0 flex items-center">
+            <div 
+              className="flex-shrink-0 flex items-center cursor-pointer" 
+              onClick={onLogoClick}
+            >
               <Brain className="h-8 w-8 text-blue-600" />
               <span className="ml-2 text-xl font-bold text-gray-900">{title}</span>
             </div>

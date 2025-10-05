@@ -3,6 +3,8 @@ import { generateSingleConceptSvg } from '../services/ai/claude';
 import { generateSingleConceptSvgWithGemini, formatTextForReadability } from '../services/ai/gemini';
 import { useAppContext } from './AppContext';
 import { useConceptExtraction } from '../hooks/useConceptExtraction';
+import { UserService } from '../services/userService';
+import { useToast } from './ToastContext';
 
 // Extend the Concept interface to include the relevant text portion
 export interface ConceptWithRange {
@@ -59,6 +61,11 @@ interface ConceptContextType {
   setVisualizationModel: (model: VisualizationModel) => void;
 }
 
+interface ConceptProviderProps {
+  children: ReactNode;
+  onShowPaymentModal?: () => void;
+}
+
 // Create the context with default values
 const ConceptContext = createContext<ConceptContextType | undefined>(undefined);
 
@@ -72,7 +79,7 @@ export const useConceptContext = () => {
 };
 
 // Provider component
-export function ConceptProvider({ children }: { children: ReactNode }) {
+export function ConceptProvider({ children, onShowPaymentModal }: ConceptProviderProps) {
   const {
     inputText, 
     setInputText,
@@ -90,6 +97,8 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
     setShowConfirmModal,
     setConfirmCallback
   } = useAppContext();
+  
+  const { showToast } = useToast();
   
   // Concept extraction hook
   const { extractConceptsWithRanges } = useConceptExtraction();
@@ -138,6 +147,22 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
   const handleVisualize = async () => {
     if (!inputText.trim()) return;
     
+    // ✅ CHECK CREDITS BEFORE PROCEEDING
+    try {
+      const hasSufficientCredits = await UserService.hasSufficientCredits(1);
+      if (!hasSufficientCredits) {
+        showToast('Insufficient credits. You need 1 credit to visualize.', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        return;
+      }
+    } catch (error) {
+      console.error('Error checking credits:', error);
+      showToast('Failed to check credit balance', 'error');
+      return;
+    }
+    
     setIsLoading(true);
     setError('');
     setResults([]);
@@ -149,6 +174,22 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
     setActiveConceptIndex(0); // Reset to the first concept
     
     try {
+      // ✅ DEDUCT 1 CREDIT
+      const creditResult = await UserService.useCredits(
+        1,
+        'visualize',
+        'Generated visualization from text'
+      );
+      
+      if (!creditResult.success) {
+        showToast(creditResult.error || 'Insufficient credits', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        setIsLoading(false);
+        return;
+      }
+      
       // Step 1: Extract concepts with text ranges using the chunking approach
       setStatusMessage("Analyzing text and extracting concepts from chunks...");
       const conceptsWithRanges = await extractConceptsWithRanges(inputText);
@@ -283,6 +324,7 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
         setActiveTab('visualization');
         // Ensure we're starting at the first concept
         setActiveConceptIndex(0);
+        showToast('Visualization created! 1 credit deducted.', 'success');
       } else {
         throw new Error('No concepts could be visualized successfully');
       }
@@ -326,6 +368,22 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
   const regenerateConcept = async (index: number) => {
     if (index < 0 || index >= results.length) return;
     
+    // ✅ CHECK CREDITS BEFORE PROCEEDING
+    try {
+      const hasSufficientCredits = await UserService.hasSufficientCredits(0.5);
+      if (!hasSufficientCredits) {
+        showToast('Insufficient credits. You need 0.5 credits to regenerate.', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        return;
+      }
+    } catch (error) {
+      console.error('Error checking credits:', error);
+      showToast('Failed to check credit balance', 'error');
+      return;
+    }
+    
     setIsLoading(true);
     setError('');
     setStatusMessage(`Regenerating visualization for "${results[index].conceptTitle}"...`);
@@ -339,6 +397,23 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
     });
     
     try {
+      // ✅ DEDUCT 0.5 CREDITS
+      const creditResult = await UserService.useCredits(
+        0.5,
+        'regenerate',
+        `Regenerated visualization: ${results[index].conceptTitle}`
+      );
+      
+      if (!creditResult.success) {
+        showToast(creditResult.error || 'Insufficient credits', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        setIsLoading(false);
+        setProcessingIndices(new Set());
+        return;
+      }
+      
       // Get the concept to regenerate
       const concept = results[index];
       
@@ -365,6 +440,8 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
         updated.add(index);
         return updated;
       });
+      
+      showToast('Visualization regenerated! 0.5 credits deducted.', 'success');
     } catch (error: any) {
       console.error('Error regenerating visualization:', error);
       setError(`Failed to regenerate visualization: ${error.message || 'Unknown error'}`);
@@ -380,6 +457,22 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
   const regenerateConceptWithClaude = async (index: number) => {
     if (index < 0 || index >= results.length) return;
     
+    // ✅ CHECK CREDITS BEFORE PROCEEDING
+    try {
+      const hasSufficientCredits = await UserService.hasSufficientCredits(0.5);
+      if (!hasSufficientCredits) {
+        showToast('Insufficient credits. You need 0.5 credits to regenerate.', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        return;
+      }
+    } catch (error) {
+      console.error('Error checking credits:', error);
+      showToast('Failed to check credit balance', 'error');
+      return;
+    }
+    
     setIsLoading(true);
     setError('');
     setStatusMessage(`Regenerating visualization for "${results[index].conceptTitle}"...`);
@@ -393,6 +486,23 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
     });
     
     try {
+      // ✅ DEDUCT 0.5 CREDITS
+      const creditResult = await UserService.useCredits(
+        0.5,
+        'regenerate',
+        `Regenerated visualization (Advanced): ${results[index].conceptTitle}`
+      );
+      
+      if (!creditResult.success) {
+        showToast(creditResult.error || 'Insufficient credits', 'error');
+        if (onShowPaymentModal) {
+          onShowPaymentModal();
+        }
+        setIsLoading(false);
+        setProcessingIndices(new Set());
+        return;
+      }
+      
       // Get the concept to regenerate
       const concept = results[index];
       
@@ -419,6 +529,8 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
         updated.add(index);
         return updated;
       });
+      
+      showToast('Visualization regenerated! 0.5 credits deducted.', 'success');
     } catch (error: any) {
       console.error('Error regenerating visualization:', error);
       setError(`Failed to regenerate visualization: ${error.message || 'Unknown error'}`);
@@ -459,4 +571,4 @@ export function ConceptProvider({ children }: { children: ReactNode }) {
       {children}
     </ConceptContext.Provider>
   );
-} 
+}
