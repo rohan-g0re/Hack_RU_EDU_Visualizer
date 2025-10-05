@@ -3,7 +3,7 @@ import { config } from '../config/env.config';
 
 // Initialize Stripe with secret key
 const stripe = new Stripe(config.stripe.secretKey, {
-  apiVersion: '2024-11-20.acacia',
+  apiVersion: '2024-11-20.acacia' as Stripe.LatestApiVersion,
 });
 
 export const stripeService = {

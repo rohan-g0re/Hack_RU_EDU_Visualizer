@@ -23,9 +23,10 @@ router.post('/', async (req: Request, res: Response) => {
 
   try {
     // Verify webhook signature
+    const sigString = Array.isArray(sig) ? sig[0] : sig;
     event = stripeService.constructWebhookEvent(
       req.body,
-      sig,
+      sigString,
       config.stripe.webhookSecret
     );
   } catch (err: any) {
@@ -67,7 +68,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.log('   Invoice ID:', invoice.id);
         console.log('   Amount:', invoice.amount_paid / 100, 'USD');
         console.log('   Customer Email:', invoice.customer_email);
-        console.log('   Subscription ID:', invoice.subscription);
+        console.log('   Subscription ID:', (invoice as any).subscription);
         console.log('   Billing Reason:', invoice.billing_reason);
         console.log('');
         console.log('📝 TODO Phase 2: Add 100 credits to user account');
@@ -79,7 +80,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.log('❌ SUBSCRIPTION PAYMENT FAILED');
         console.log('   Invoice ID:', failedInvoice.id);
         console.log('   Customer Email:', failedInvoice.customer_email);
-        console.log('   Subscription ID:', failedInvoice.subscription);
+        console.log('   Subscription ID:', (failedInvoice as any).subscription);
         console.log('   Attempt Count:', failedInvoice.attempt_count);
         break;
 
@@ -89,7 +90,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.log('   Subscription ID:', createdSub.id);
         console.log('   Status:', createdSub.status);
         console.log('   Customer ID:', createdSub.customer);
-        console.log('   Current Period End:', new Date(createdSub.current_period_end * 1000));
+        console.log('   Current Period End:', new Date((createdSub as any).current_period_end * 1000));
         console.log('');
         console.log('📝 TODO Phase 2: Store subscription ID in user account');
         break;
@@ -100,7 +101,7 @@ router.post('/', async (req: Request, res: Response) => {
         console.log('   Subscription ID:', updatedSub.id);
         console.log('   Status:', updatedSub.status);
         console.log('   Cancel at period end:', updatedSub.cancel_at_period_end);
-        console.log('   Current Period End:', new Date(updatedSub.current_period_end * 1000));
+        console.log('   Current Period End:', new Date((updatedSub as any).current_period_end * 1000));
         console.log('');
         console.log('📝 TODO Phase 2: Update subscription status in database');
         break;
@@ -126,7 +127,7 @@ router.post('/', async (req: Request, res: Response) => {
   console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
   // Return a response to acknowledge receipt of the event
-  res.json({ received: true });
+  return res.json({ received: true });
 });
 
 export default router;

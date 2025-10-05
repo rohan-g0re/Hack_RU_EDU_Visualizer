@@ -31,12 +31,12 @@ router.post('/create-payment-intent', async (req: Request, res: Response) => {
 
     console.log('✅ Payment intent created:', paymentIntent.id);
 
-    res.json({
+    return res.json({
       clientSecret: paymentIntent.client_secret,
     });
   } catch (error: any) {
     console.error('❌ Error creating payment intent:', error.message);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
@@ -81,13 +81,13 @@ router.post('/create-subscription', async (req: Request, res: Response) => {
 
     console.log('✅ Subscription created:', subscription.id);
 
-    res.json({
+    return res.json({
       clientSecret,
       subscriptionId: subscription.id,
     });
   } catch (error: any) {
     console.error('❌ Error creating subscription:', error.message);
-    res.status(500).json({ error: error.message });
+    return res.status(500).json({ error: error.message });
   }
 });
 
