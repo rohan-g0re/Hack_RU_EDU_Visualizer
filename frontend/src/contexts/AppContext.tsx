@@ -45,6 +45,10 @@ interface AppContextType {
   showLandingPage: boolean;
   setShowLandingPage: (show: boolean) => void;
   
+  // About page state
+  showAboutPage: boolean;
+  setShowAboutPage: (show: boolean) => void;
+  
   // Reset application state
   resetAppState: () => void;
 }
@@ -94,6 +98,9 @@ export function AppProvider({
   // Landing page state
   const [showLandingPage, setShowLandingPage] = useState<boolean>(initialShowLandingPage);
   
+  // About page state
+  const [showAboutPage, setShowAboutPage] = useState<boolean>(false);
+  
   // Call onVisitedMain when landing page is hidden
   useEffect(() => {
     if (!showLandingPage && onVisitedMain) {
@@ -138,6 +145,8 @@ export function AppProvider({
         setIsExpandedView,
         showLandingPage,
         setShowLandingPage,
+        showAboutPage,
+        setShowAboutPage,
         resetAppState
       }}
     >

@@ -50,33 +50,7 @@ const VisualizationTab: React.FC<VisualizationTabProps> = ({
   } = useTextHighlighting();
 
   return (
-    <div className={`flex flex-col h-[calc(100vh-48px)] animate-fadeIn ${className}`}>
-      <div className="flex items-center justify-between px-6 py-3 bg-[#112240] border-b border-blue-800/30">
-        <div className="flex items-center gap-3">
-          {/* Empty div to maintain layout */}
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <Brain className="h-6 w-6 text-[#38BDF8]" />
-          <h3 className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#38BDF8] via-[#64B5F6] to-[#8DEBFF] tracking-tight">
-            Nous<span className="text-[#64B5F6]">.</span><span className="font-extrabold">AI</span>
-          </h3>
-        </div>
-        
-        <div className="flex items-center gap-3">
-          <button
-            onClick={onNewVisualization}
-            className="flex items-center gap-2 px-4 py-2 bg-[#0A192F]/60 border border-blue-800/30 rounded-full hover:bg-[#1E3A5F] transition-all duration-300 text-white/90 font-medium"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
-              <path d="m15 18-6-6 6-6"></path>
-            </svg>
-            <span className="hidden sm:inline">New Visualization</span>
-            <span className="sm:hidden">Back</span>
-          </button>
-        </div>
-      </div>
-      
+    <div className={`flex flex-col h-screen animate-fadeIn ${className}`}>
       <div className="flex flex-col lg:flex-row flex-1 bg-[#0A192F] overflow-hidden">
         {/* Section 1: Text Area (40% when assistant open, 50% when closed) */}
         <div className={`w-full ${isVoiceAssistantOpen ? 'lg:w-[40%]' : 'lg:w-[50%]'} p-4 md:p-6 bg-[#0A192F] flex flex-col border-b lg:border-b-0 lg:border-r border-blue-800/30 h-full animate-slideUp animation-delay-300 transition-all duration-300`}>

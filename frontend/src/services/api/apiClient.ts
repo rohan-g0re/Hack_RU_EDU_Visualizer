@@ -61,6 +61,18 @@ class ApiClient {
   }
 
   /**
+   * Generic POST request
+   */
+  async post<T = any>(endpoint: string, data?: any): Promise<{ data: T }> {
+    const result = await this.request<T>(endpoint, {
+      method: 'POST',
+      body: data ? JSON.stringify(data) : undefined,
+    });
+    // Wrap result in { data } to match expected format
+    return { data: result };
+  }
+
+  /**
    * Generate SVG visualization
    */
   async generateSVG(

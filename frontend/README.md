@@ -1,10 +1,11 @@
-# Nous.AI Frontend
+<<<<<<< HEAD
+# VizKidd Frontend
 
 React + TypeScript + Vite frontend application for educational text visualization.
 
 ## Overview
 
-This is the frontend application for Nous.AI, an educational platform that transforms complex text into interactive AI-generated visualizations. The app uses React with TypeScript, styled with TailwindCSS, and built with Vite.
+This is the frontend application for VizKidd, an educational platform that transforms complex text into interactive AI-generated visualizations. The app uses React with TypeScript, styled with TailwindCSS, and built with Vite.
 
 ## Features
 
@@ -173,3 +174,5 @@ npm run build
 
 MIT
 
+=======
+>>>>>>> dc9f900 (stripe payments working)

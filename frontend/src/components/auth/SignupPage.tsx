@@ -25,7 +25,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
     clearError();
 
     // Validation
-    if (!email || !password || !confirmPassword) {
+    if (!fullName || !email || !password || !confirmPassword) {
       setLocalError('Please fill in all required fields');
       return;
     }
@@ -78,7 +78,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
             </div>
             <h3 className="text-2xl font-bold text-white mb-2">Account Created!</h3>
             <p className="text-gray-300 mb-4">
-              Welcome to Nous.AI! Please check your email to verify your account.
+              Welcome to VizKidd! Please check your email to verify your account.
             </p>
             <button
               onClick={onClose}
@@ -99,7 +99,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
         <div className="flex items-center justify-center mb-8">
           <Brain className="h-10 w-10 text-[#38BDF8] mr-3" />
           <h2 className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#38BDF8] via-[#64B5F6] to-[#8DEBFF]">
-            Join Nous.AI
+            Join VizKidd
           </h2>
         </div>
 
@@ -121,10 +121,10 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
 
         {/* Signup Form */}
         <form onSubmit={handleSubmit} className="space-y-5">
-          {/* Full Name Field (Optional) */}
+          {/* Full Name Field */}
           <div>
             <label htmlFor="fullName" className="block text-sm font-medium text-gray-300 mb-2">
-              Full Name <span className="text-gray-500 text-xs">(optional)</span>
+              Full Name
             </label>
             <div className="relative">
               <User className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
@@ -137,6 +137,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
                 placeholder="John Doe"
                 disabled={isSubmitting}
                 autoComplete="name"
+                required
               />
             </div>
           </div>

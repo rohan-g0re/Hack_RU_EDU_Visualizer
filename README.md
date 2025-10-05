@@ -1,10 +1,10 @@
-# Nous.AI - Educational Visualization Platform
+# VizKidd - Educational Visualization Platform
 
 Transform complex text into interactive AI-generated visualizations for enhanced learning.
 
 ## 🎯 Overview
 
-Nous.AI is an educational platform that leverages AI (Claude & Gemini) to convert complex technical text into easy-to-understand visual representations. The platform supports multiple input methods, real-time concept extraction, and voice-assisted learning.
+VizKidd is an educational platform that leverages AI (Claude & Gemini) to convert complex technical text into easy-to-understand visual representations. The platform supports multiple input methods, real-time concept extraction, and voice-assisted learning.
 
 ## 🏗️ Repository Structure
 

@@ -82,7 +82,7 @@ Your response must start with <svg and end with </svg> with no other text before
 
     // Make the API call to Claude
     const message = await anthropic.messages.create({
-      model: 'claude-3-7-sonnet-20250219',
+      model: 'claude-sonnet-4-20250514',
       max_tokens: 4000,
       system: systemPrompt,
       messages: [{ role: 'user', content: mainPrompt }],

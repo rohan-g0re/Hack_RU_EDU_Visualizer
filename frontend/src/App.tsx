@@ -8,6 +8,7 @@ import { VoiceProvider, useVoiceContext } from './contexts/VoiceContext';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import ExpandedVisualization from './components/common/ExpandedVisualization';
 import LandingPage from './components/LandingPage';
+import AboutUsPage from './components/AboutUsPage';
 import InputTab from './components/InputTab';
 import VisualizationTab from './components/VisualizationTab';
 import LoginPage from './components/auth/LoginPage';
@@ -33,7 +34,9 @@ function AppContent() {
     isExpandedView,
     setIsExpandedView,
     showLandingPage,
-    setShowLandingPage
+    setShowLandingPage,
+    showAboutPage,
+    setShowAboutPage
   } = useAppContext();
   
   const {
@@ -41,7 +44,7 @@ function AppContent() {
   } = useConceptContext();
 
   const { user, signOut } = useAuth();
-  const { showToast } = useToast();
+  const { showToast, showCenteredModal } = useToast();
   
   // Payment modal state
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -92,6 +95,15 @@ function AppContent() {
     }
   };
 
+  const handleAboutUsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowAboutPage(true);
+  };
+
+  const handleBackFromAbout = () => {
+    setShowAboutPage(false);
+  };
+
   // Auth handlers
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -108,7 +120,7 @@ function AppContent() {
       await signOut();
       // Redirect to landing page after logout
       setShowLandingPage(true);
-      showToast('Successfully logged out', 'success');
+      showCenteredModal('Successfully logged out!', 'success');
     } catch (error) {
       console.error('Logout error:', error);
       showToast('Failed to log out', 'error');
@@ -127,10 +139,17 @@ function AppContent() {
 
   // Handle payment selection
   const handleSelectPlan = async (planId: 'subscription' | 'onetime') => {
-    showToast('Payment integration coming soon!', 'info');
-    // TODO: Integrate Stripe Checkout
-    setShowPaymentModal(false);
+    // Payment is now handled directly in PaymentModal with Stripe Elements
+    // This callback is kept for backward compatibility
+    console.log('Payment plan selected:', planId);
   };
+
+  // If About page is active, show it
+  if (showAboutPage) {
+    return (
+      <AboutUsPage onBack={handleBackFromAbout} />
+    );
+  }
 
   // If landing page is active, show it instead of the main app
   if (showLandingPage) {
@@ -141,6 +160,7 @@ function AppContent() {
           scrollToRef={scrollToSection}
           onLoginClick={handleLoginClick}
           onSignupClick={handleSignupClick}
+          onAboutUsClick={handleAboutUsClick}
         />
         {showLoginModal && (
           <LoginPage
@@ -174,61 +194,73 @@ function AppContent() {
   return (
     <div className="min-h-screen bg-[#0A192F] text-white font-['Manrope'] relative">
       {/* Header to match landing page exactly */}
-      {activeTab === 'input' && (
-        <header className="py-4 px-6 md:px-12 sticky top-0 z-50 bg-[#0A192F]/80 backdrop-blur-md border-b border-blue-800/20">
-          <div className="w-full mx-auto flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <Brain className="h-8 w-8 text-white" />
-              <h1 className="text-2xl font-bold text-white">Nous.AI</h1>
-            </div>
-            
-            <nav className="hidden md:flex items-center gap-6">
-              <a href="#" onClick={handleHomeClick} className="text-white/80 hover:text-white transition-colors">Home</a>
-              <a href="#" onClick={handleServicesClick} className="text-white/80 hover:text-white transition-colors">Services</a>
-              <a href="#" onClick={handleResultsClick} className="text-white/80 hover:text-white transition-colors">Results</a>
-              <a href="#" className="text-white/80 hover:text-white transition-colors">About Us</a>
-            </nav>
-            
-            <div className="flex items-center gap-3">
-              {user ? (
-                <>
-                  <CreditDisplay 
-                    onAddCreditsClick={() => setShowPaymentModal(true)}
-                    showAddButton={true}
-                  />
-                  <UserMenu 
-                    onLogout={handleLogout}
-                    onProfileClick={() => {
-                      // TODO: Navigate to profile
-                      showToast('Profile coming soon!', 'info');
-                    }}
-                    onSavedVisualizationsClick={() => {
-                      // TODO: Navigate to saved visualizations
-                      showToast('Saved visualizations coming soon!', 'info');
-                    }}
-                    onCreditHistoryClick={() => {
-                      // TODO: Navigate to credit history
-                      showToast('Credit history coming soon!', 'info');
-                    }}
-                  />
-                </>
-              ) : (
-                <>
-                  <a href="#" onClick={handleLoginClick} className="text-white/90 hover:text-white font-medium transition-colors">Log In</a>
-                  <a href="#" onClick={handleSignupClick} className="px-4 py-2 bg-white text-[#0A0E17] font-semibold rounded-full hover:bg-white/90 transition-colors">Sign Up</a>
-                </>
-              )}
-            </div>
-            
-            <button className="md:hidden text-white/90" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
-              {mobileMenuOpen ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-            </button>
+      <header className="py-4 px-6 md:px-12 sticky top-0 z-50 bg-[#0A192F]/80 backdrop-blur-md border-b border-blue-800/20">
+        <div className="w-full mx-auto flex justify-between items-center">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={handleHomeClick}>
+            <Brain className="h-8 w-8 text-white" />
+            <h1 className="text-2xl font-bold text-white">VizKidd</h1>
           </div>
-        </header>
-      )}
+          
+          <nav className="hidden md:flex items-center gap-6">
+            <a href="#" onClick={handleHomeClick} className="text-white/80 hover:text-white transition-colors">Home</a>
+            <a href="#" onClick={handleServicesClick} className="text-white/80 hover:text-white transition-colors">Services</a>
+            <a href="#" onClick={handleResultsClick} className="text-white/80 hover:text-white transition-colors">Results</a>
+            <a href="#" onClick={handleAboutUsClick} className="text-white/80 hover:text-white transition-colors">About Us</a>
+          </nav>
+          
+          <div className="flex items-center gap-3">
+            {/* Show New Visualization button when in visualization tab */}
+            {activeTab === 'visualization' && (
+              <button
+                onClick={handleNewVisualization}
+                className="flex items-center gap-2 px-4 py-2 bg-[#0A192F]/60 border border-blue-800/30 rounded-full hover:bg-[#1E3A5F] transition-all duration-300 text-white/90 font-medium"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4">
+                  <path d="m15 18-6-6 6-6"></path>
+                </svg>
+                <span className="hidden sm:inline">New Visualization</span>
+                <span className="sm:hidden">Back</span>
+              </button>
+            )}
+            
+            {user ? (
+              <>
+                <CreditDisplay 
+                  onAddCreditsClick={() => setShowPaymentModal(true)}
+                  showAddButton={true}
+                />
+                <UserMenu 
+                  onLogout={handleLogout}
+                  onProfileClick={() => {
+                    // TODO: Navigate to profile
+                    showToast('Profile coming soon!', 'info');
+                  }}
+                  onSavedVisualizationsClick={() => {
+                    // TODO: Navigate to saved visualizations
+                    showToast('Saved visualizations coming soon!', 'info');
+                  }}
+                  onCreditHistoryClick={() => {
+                    // TODO: Navigate to credit history
+                    showToast('Credit history coming soon!', 'info');
+                  }}
+                />
+              </>
+            ) : (
+              <>
+                <a href="#" onClick={handleLoginClick} className="text-white/90 hover:text-white font-medium transition-colors">Log In</a>
+                <a href="#" onClick={handleSignupClick} className="px-4 py-2 bg-white text-[#0A0E17] font-semibold rounded-full hover:bg-white/90 transition-colors">Sign Up</a>
+              </>
+            )}
+          </div>
+          
+          <button className="md:hidden text-white/90" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+            {mobileMenuOpen ? <Close className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </button>
+        </div>
+      </header>
       
       {/* Mobile menu - enhanced with aesthetic styling */}
-      {mobileMenuOpen && activeTab === 'input' && (
+      {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 md:hidden">
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" onClick={() => setMobileMenuOpen(false)}></div>
           <div className="absolute top-16 right-0 p-4 w-64 bg-[#112240] border border-blue-800/30 shadow-xl rounded-bl-xl animate-slideIn">
@@ -236,7 +268,7 @@ function AppContent() {
               <a href="#" onClick={(e) => { handleHomeClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Home</a>
               <a href="#" onClick={(e) => { handleServicesClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Services</a>
               <a href="#" onClick={(e) => { handleResultsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Results</a>
-              <a href="#" className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
+              <a href="#" onClick={(e) => { handleAboutUsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
             </nav>
           </div>
         </div>
@@ -374,7 +406,7 @@ function App() {
     <AuthProvider>
       <ToastProvider>
         <AppProvider initialShowLandingPage={initialLandingPageState} onVisitedMain={() => localStorage.setItem('hasVisitedMain', 'true')}>
-          <ConceptProvider>
+          <ConceptProvider onShowPaymentModal={() => setShowPaymentModal(true)}>
             <VoiceProvider>
               <AppContent />
             </VoiceProvider>
