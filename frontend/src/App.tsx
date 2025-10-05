@@ -177,7 +177,7 @@ function AppContent() {
       {activeTab === 'input' && (
         <header className="py-4 px-6 md:px-12 sticky top-0 z-50 bg-[#0A192F]/80 backdrop-blur-md border-b border-blue-800/20">
           <div className="w-full mx-auto flex justify-between items-center">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 cursor-pointer" onClick={handleHomeClick}>
               <Brain className="h-8 w-8 text-white" />
               <h1 className="text-2xl font-bold text-white">VizKidd</h1>
             </div>

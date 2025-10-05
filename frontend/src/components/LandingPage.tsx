@@ -121,7 +121,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
       <div ref={heroSectionRef} className="min-h-screen relative flex flex-col">
         {/* Header */}
         <header className="relative z-10 py-4 px-6 md:px-12 flex justify-between items-center">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 cursor-pointer" onClick={handleHomeClick}>
             <Brain className="h-8 w-8 text-white" />
             <h1 className="text-2xl font-bold">VizKidd</h1>
           </div>

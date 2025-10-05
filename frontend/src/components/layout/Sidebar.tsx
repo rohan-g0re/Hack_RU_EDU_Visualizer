@@ -13,6 +13,7 @@ interface SidebarProps {
   items?: SidebarItem[];
   isOpen?: boolean;
   onClose?: () => void;
+  onLogoClick?: () => void;
 }
 
 const defaultItems: SidebarItem[] = [
@@ -46,7 +47,8 @@ const defaultItems: SidebarItem[] = [
 const Sidebar: React.FC<SidebarProps> = ({
   items = defaultItems,
   isOpen = true,
-  onClose
+  onClose,
+  onLogoClick
 }) => {
   if (!isOpen) return null;
   
@@ -72,7 +74,10 @@ const Sidebar: React.FC<SidebarProps> = ({
         
         {/* Logo */}
         <div className="px-6 pt-6 pb-4">
-          <div className="flex items-center">
+          <div 
+            className="flex items-center cursor-pointer" 
+            onClick={onLogoClick}
+          >
             <Brain className="h-8 w-8 text-blue-600" />
             <span className="ml-2 text-xl font-bold text-gray-900">VizKidd</span>
           </div>
