@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Brain, Download, ChevronRight, ArrowDown, Menu, X, Play } from 'lucide-react';
+import { Brain, ArrowDown, Menu, X, Play } from 'lucide-react';
 import { useAuth } from '../contexts/AuthContext';
 import backgroundImage from '../assets/landing_page_background.jpg';
 import text1Image from '../assets/text1_Image.png';
@@ -123,7 +123,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
         <header className="relative z-10 py-4 px-6 md:px-12 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Brain className="h-8 w-8 text-white" />
-            <h1 className="text-2xl font-bold">Nous.AI</h1>
+            <h1 className="text-2xl font-bold">VizKidd</h1>
           </div>
           <nav className="hidden md:flex items-center gap-6">
             <a href="#" onClick={handleHomeClick} className="text-white/80 hover:text-white transition">Home</a>
@@ -134,7 +134,6 @@ const LandingPage: React.FC<LandingPageProps> = ({
           <div className="flex items-center gap-3">
             {user ? (
               <>
-                <span className="text-white/70 text-sm hidden md:inline">{user.email}</span>
                 <button 
                   onClick={handleVisualizeClick}
                   className="px-4 py-2 bg-gradient-to-r from-[#38BDF8] to-[#6C9CFF] text-white font-semibold rounded-full hover:shadow-lg hover:shadow-[#38BDF8]/30 transition-all"
@@ -179,7 +178,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
           </h1>
           
           <p className="text-xl text-white/80 max-w-2xl mb-12 font-light animate-fadeIn opacity-0 animation-delay-300">
-            Nous.AI transforms your complex text into beautiful, 
+            VizKidd transforms your complex text into beautiful, 
             intuitive visualizations that clarify concepts and ideas.
           </p>
           
@@ -212,7 +211,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
                  transform: scrollY > 300 ? 'translateY(0)' : 'translateY(10px)' 
                }}>
             <h2 className="text-4xl md:text-5xl font-bold text-center mb-24">
-              Nous.AI Offers<br />
+              VizKidd Offers<br />
               <span className="text-gray-400 font-normal">Visual Intelligence</span>
             </h2>
           </div>

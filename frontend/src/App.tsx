@@ -179,7 +179,7 @@ function AppContent() {
           <div className="w-full mx-auto flex justify-between items-center">
             <div className="flex items-center gap-2">
               <Brain className="h-8 w-8 text-white" />
-              <h1 className="text-2xl font-bold text-white">Nous.AI</h1>
+              <h1 className="text-2xl font-bold text-white">VizKidd</h1>
             </div>
             
             <nav className="hidden md:flex items-center gap-6">

@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  title = 'Nous.AI',
+  title = 'VizKidd',
   isMobileMenuOpen,
   toggleMobileMenu,
 }) => {

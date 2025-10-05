@@ -1,7 +1,7 @@
 {
   "name": "nous-ai-backend",
   "version": "1.0.0",
-  "description": "Backend API for Nous.AI - Secure AI service proxy",
+  "description": "Backend API for VizKidd - Secure AI service proxy",
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",

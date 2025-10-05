@@ -1,6 +1,6 @@
-# Deployment Guide - Nous.AI
+# Deployment Guide - VizKidd
 
-Complete guide for deploying Nous.AI with frontend on Netlify and backend on Render.
+Complete guide for deploying VizKidd with frontend on Netlify and backend on Render.
 
 ## Architecture Overview
 

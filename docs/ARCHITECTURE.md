@@ -17,7 +17,7 @@ index.html → src/main.tsx → src/App.tsx
 ```
 
 **Flow:**
-1. `index.html` - HTML shell with meta tags and title "Nous.AI | Text Visualization"
+1. `index.html` - HTML shell with meta tags and title "VizKidd | Text Visualization"
 2. `src/main.tsx` - React app initialization with StrictMode
 3. `src/App.tsx` - Main application component with provider hierarchy
 
@@ -36,12 +36,12 @@ AppProvider → ConceptProvider → VoiceProvider → AppContent
 ### 1. Frontend Structure
 
 #### Layout Components (`src/components/layout/`)
-- **Header.tsx**: Navigation header with "Nous.AI" branding
-- **Sidebar.tsx**: Left sidebar with "Nous.AI" logo and navigation
-- **Footer.tsx**: Footer with "Nous.AI" copyright notice
+- **Header.tsx**: Navigation header with "VizKidd" branding
+- **Sidebar.tsx**: Left sidebar with "VizKidd" logo and navigation
+- **Footer.tsx**: Footer with "VizKidd" copyright notice
 
 #### Feature Components
-- **LandingPage.tsx**: Marketing page with "Nous.AI" branding and feature descriptions
+- **LandingPage.tsx**: Marketing page with "VizKidd" branding and feature descriptions
 - **InputTab.tsx**: Text input interface with PDF upload and URL input
 - **VisualizationTab.tsx**: Results display with concept navigation
 - **VoiceAssistant.tsx**: Voice interaction interface

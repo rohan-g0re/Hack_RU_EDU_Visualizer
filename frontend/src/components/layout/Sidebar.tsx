@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         <div className="px-6 pt-6 pb-4">
           <div className="flex items-center">
             <Brain className="h-8 w-8 text-blue-600" />
-            <span className="ml-2 text-xl font-bold text-gray-900">Nous.AI</span>
+            <span className="ml-2 text-xl font-bold text-gray-900">VizKidd</span>
           </div>
         </div>
         
