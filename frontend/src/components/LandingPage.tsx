@@ -12,13 +12,15 @@ interface LandingPageProps {
   scrollToRef?: string;
   onLoginClick: (e: React.MouseEvent) => void;
   onSignupClick: (e: React.MouseEvent) => void;
+  onAboutUsClick: (e: React.MouseEvent) => void;
 }
 
 const LandingPage: React.FC<LandingPageProps> = ({ 
   onVisualizeClick, 
   scrollToRef,
   onLoginClick,
-  onSignupClick 
+  onSignupClick,
+  onAboutUsClick
 }) => {
   const { user } = useAuth();
   const [scrollY, setScrollY] = useState(0);
@@ -129,7 +131,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
             <a href="#" onClick={handleHomeClick} className="text-white/80 hover:text-white transition">Home</a>
             <a href="#" onClick={handleServicesClick} className="text-white/80 hover:text-white transition">Services</a>
             <a href="#" onClick={handleResultsClick} className="text-white/80 hover:text-white transition">Results</a>
-            <a href="#" className="text-white/80 hover:text-white transition">About Us</a>
+            <a href="#" onClick={onAboutUsClick} className="text-white/80 hover:text-white transition">About Us</a>
           </nav>
           <div className="flex items-center gap-3">
             {user ? (
@@ -162,7 +164,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
                 <a href="#" onClick={(e) => { handleHomeClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Home</a>
                 <a href="#" onClick={(e) => { handleServicesClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Services</a>
                 <a href="#" onClick={(e) => { handleResultsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Results</a>
-                <a href="#" className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
+                <a href="#" onClick={(e) => { onAboutUsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
               </nav>
             </div>
           </div>

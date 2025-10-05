@@ -8,6 +8,7 @@ import { VoiceProvider, useVoiceContext } from './contexts/VoiceContext';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import ExpandedVisualization from './components/common/ExpandedVisualization';
 import LandingPage from './components/LandingPage';
+import AboutUsPage from './components/AboutUsPage';
 import InputTab from './components/InputTab';
 import VisualizationTab from './components/VisualizationTab';
 import LoginPage from './components/auth/LoginPage';
@@ -33,7 +34,9 @@ function AppContent() {
     isExpandedView,
     setIsExpandedView,
     showLandingPage,
-    setShowLandingPage
+    setShowLandingPage,
+    showAboutPage,
+    setShowAboutPage
   } = useAppContext();
   
   const {
@@ -92,6 +95,15 @@ function AppContent() {
     }
   };
 
+  const handleAboutUsClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    setShowAboutPage(true);
+  };
+
+  const handleBackFromAbout = () => {
+    setShowAboutPage(false);
+  };
+
   // Auth handlers
   const handleLoginClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -132,6 +144,13 @@ function AppContent() {
     setShowPaymentModal(false);
   };
 
+  // If About page is active, show it
+  if (showAboutPage) {
+    return (
+      <AboutUsPage onBack={handleBackFromAbout} />
+    );
+  }
+
   // If landing page is active, show it instead of the main app
   if (showLandingPage) {
     return (
@@ -141,6 +160,7 @@ function AppContent() {
           scrollToRef={scrollToSection}
           onLoginClick={handleLoginClick}
           onSignupClick={handleSignupClick}
+          onAboutUsClick={handleAboutUsClick}
         />
         {showLoginModal && (
           <LoginPage
@@ -185,7 +205,7 @@ function AppContent() {
             <a href="#" onClick={handleHomeClick} className="text-white/80 hover:text-white transition-colors">Home</a>
             <a href="#" onClick={handleServicesClick} className="text-white/80 hover:text-white transition-colors">Services</a>
             <a href="#" onClick={handleResultsClick} className="text-white/80 hover:text-white transition-colors">Results</a>
-            <a href="#" className="text-white/80 hover:text-white transition-colors">About Us</a>
+            <a href="#" onClick={handleAboutUsClick} className="text-white/80 hover:text-white transition-colors">About Us</a>
           </nav>
           
           <div className="flex items-center gap-3">
@@ -248,7 +268,7 @@ function AppContent() {
               <a href="#" onClick={(e) => { handleHomeClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Home</a>
               <a href="#" onClick={(e) => { handleServicesClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Services</a>
               <a href="#" onClick={(e) => { handleResultsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">Results</a>
-              <a href="#" className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
+              <a href="#" onClick={(e) => { handleAboutUsClick(e); setMobileMenuOpen(false); }} className="px-4 py-3 text-white/80 hover:text-white hover:bg-[#1E3A5F] rounded-lg transition-colors">About Us</a>
             </nav>
           </div>
         </div>
