@@ -15,6 +15,7 @@ interface EnvConfig {
     anthropicApiKey: string;
     geminiApiKey: string;
     geminiModel: string;
+    geminiSvgModel: string;
   };
   stripe: {
     secretKey: string;
@@ -44,8 +45,10 @@ export const config: EnvConfig = {
   ai: {
     anthropicApiKey: getEnvVar('ANTHROPIC_API_KEY'),
     geminiApiKey: getEnvVar('GEMINI_API_KEY'),
-    // Default to a widely available model; can be overridden via GEMINI_MODEL
+    // Default to flash-2.0 for general tasks
     geminiModel: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
+    // Use flash-2.5 specifically for SVG generation
+    geminiSvgModel: process.env.GEMINI_SVG_MODEL || 'gemini-2.5-flash',
   },
   stripe: {
     secretKey: getEnvVar('STRIPE_SECRET_KEY'),

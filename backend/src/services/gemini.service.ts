@@ -10,7 +10,7 @@ interface VisualizationPrompt {
 }
 
 /**
- * Generate SVG for a single concept using Gemini 2.0 Flash
+ * Generate SVG for a single concept using Gemini 2.5 Flash
  */
 export async function generateSingleConceptSvgWithGemini(
   concept: { title: string; description: string },
@@ -21,12 +21,12 @@ export async function generateSingleConceptSvgWithGemini(
 }
 
 /**
- * Convert text to a visual representation using Gemini 2.0 Flash
+ * Convert text to a visual representation using Gemini 2.5 Flash
  */
 export async function generateSvgVisualizationWithGemini({ text, type }: VisualizationPrompt): Promise<string> {
   try {
-    // Use Gemini model from config for SVG generation
-    const model = genAI.getGenerativeModel({ model: config.ai.geminiModel });
+    // Use Gemini SVG-specific model (2.5 Flash) for SVG generation
+    const model = genAI.getGenerativeModel({ model: config.ai.geminiSvgModel });
 
     const prompt = `You are an expert at creating precise, technical SVG visualizations optimized for digital displays.
     

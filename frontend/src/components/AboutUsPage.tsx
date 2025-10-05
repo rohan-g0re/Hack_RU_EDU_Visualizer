@@ -1,9 +1,50 @@
 import React from 'react';
-import { ArrowLeft, Brain, Users, Target, Lightbulb, Heart } from 'lucide-react';
+import { ArrowLeft, Brain, Users, Target, Lightbulb, Heart, Mail, Linkedin, Github, User } from 'lucide-react';
+import PixelCard from './PixelCard';
+
+// Import team member images - Add your actual image files to src/assets/team/
+// You can use .jpg, .png, or any image format
+// Example: import rohanImage from '../assets/team/rohan.jpg';
 
 interface AboutUsPageProps {
   onBack: () => void;
 }
+
+// Team members data
+const teamMembers = [
+  {
+    name: 'Rohan Gore',
+    email: 'rmg9725@nyu.edu',
+    linkedin: 'https://www.linkedin.com/in/rohan-g0re/',
+    github: 'https://github.com/rohan-g0re',
+    image: '/team/rohan.jpg', // Update with actual image path
+    variant: 'blue' as const,
+  },
+  {
+    name: 'Sahil Sarnaik',
+    email: 'ss19100@nyu.edu',
+    linkedin: 'https://www.linkedin.com/in/sahil-sarnaik-244834299/',
+    github: 'https://github.com/Sahilms48',
+    image: '/team/sahil.jpg', // Update with actual image path
+    variant: 'green' as const,
+  },
+  {
+    name: 'Pradeep Kulkarni',
+    email: 'pradeep.k@nyu.edu',
+    linkedin: 'https://www.linkedin.com/in/pradeep05/',
+    github: 'https://github.com/Vectors0505',
+    image: '/team/pradeep.jpg', // Update with actual image path
+    variant: 'pink' as const,
+  },
+  // {
+  //   name: 'Sarah Williams',
+  //   role: 'Product Designer',
+  //   email: 'sarah.williams@vizkidd.com',
+  //   linkedin: 'https://linkedin.com/in/sarahwilliams',
+  //   github: 'https://github.com/sarahwilliams',
+  //   variant: 'blue' as const,
+  // },
+];
 
 const AboutUsPage: React.FC<AboutUsPageProps> = ({ onBack }) => {
   return (
@@ -92,6 +133,76 @@ const AboutUsPage: React.FC<AboutUsPageProps> = ({ onBack }) => {
                 and create tools that actually help.
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* Team Members Section - NEW */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">Meet Our Team</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            {teamMembers.map((member, index) => (
+              <PixelCard key={index} variant={member.variant} className="h-[360px] w-full">
+                <div className="absolute inset-0 p-6 z-10 flex flex-col items-center text-center">
+                  {/* Profile Image */}
+                  <div className="mb-4 relative">
+                    {member.image ? (
+                      <img 
+                        src={member.image} 
+                        alt={member.name}
+                        className="w-24 h-24 rounded-full object-cover border-4 border-white/10 shadow-lg"
+                        onError={(e) => {
+                          // Fallback to icon if image fails to load
+                          e.currentTarget.style.display = 'none';
+                          e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                        }}
+                      />
+                    ) : null}
+                    <div className={`w-24 h-24 rounded-full bg-white/10 flex items-center justify-center border-4 border-white/10 ${member.image ? 'hidden' : ''}`}>
+                      <User className="h-12 w-12 text-white/50" />
+                    </div>
+                  </div>
+                  
+                  <div className="mb-auto">
+                    <h3 className="text-xl font-semibold text-white mb-1">{member.name}</h3>
+                  </div>
+                  
+                  <div className="space-y-3 w-full mt-4">
+                    {/* Email */}
+                    <a 
+                      href={`mailto:${member.email}`}
+                      className="flex items-center gap-3 text-white/80 hover:text-white transition-colors group"
+                    >
+                      <div className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors flex-shrink-0">
+                        <Mail className="h-5 w-5" />
+                      </div>
+                      <span className="text-sm truncate text-left">{member.email}</span>
+                    </a>
+                    
+                    {/* Social Links */}
+                    <div className="flex gap-3 justify-center">
+                      <a 
+                        href={member.linkedin}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-blue-500/20 transition-colors group"
+                        title="LinkedIn"
+                      >
+                        <Linkedin className="h-5 w-5 text-white/80 group-hover:text-blue-400 transition-colors" />
+                      </a>
+                      <a 
+                        href={member.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-10 h-10 rounded-lg bg-white/5 flex items-center justify-center hover:bg-purple-500/20 transition-colors group"
+                        title="GitHub"
+                      >
+                        <Github className="h-5 w-5 text-white/80 group-hover:text-purple-400 transition-colors" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </PixelCard>
+            ))}
           </div>
         </section>
 
