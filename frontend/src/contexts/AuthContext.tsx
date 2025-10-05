@@ -97,6 +97,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         throw signUpError;
       }
 
+      // Check if user already exists (Supabase returns empty identities array)
+      if (data.user && data.user.identities && data.user.identities.length === 0) {
+        throw new Error('An account with this email already exists. Please sign in instead.');
+      }
+
       if (data.user && !data.session) {
         // Email confirmation required
         setError('Please check your email to confirm your account.');

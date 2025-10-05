@@ -42,19 +42,15 @@ export function startSpeechRecognition(
       
       // Send final transcript when available
       if (finalTranscript) {
-        // Temporarily pause listening while processing the query
+        // Stop listening when final transcript is received
         service.stop();
         
         // Call the final result callback
         onFinalResult(finalTranscript);
         
-        // Resume listening after a short delay to allow processing
-        setTimeout(() => {
-          // Reset state to prepare for the next question
-          service.clear();
-          onInterimResult(''); // Clear the UI transcript display
-          service.start(true);
-        }, 1000);
+        // Clear the transcript display
+        service.clear();
+        onInterimResult(''); // Clear the UI transcript display
       }
     });
     
@@ -66,7 +62,7 @@ export function startSpeechRecognition(
     
     // Clear previous transcript and start listening
     service.clear();
-    const started = service.start(true); // Set autoRestart to true
+    const started = service.start(false); // Set autoRestart to false for manual control
     
     return { 
       isRecording: started, 

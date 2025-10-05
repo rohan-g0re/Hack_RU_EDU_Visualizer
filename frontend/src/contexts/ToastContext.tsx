@@ -1,8 +1,10 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 import Toast, { ToastType } from '../components/common/Toast';
+import CenteredModal, { CenteredModalType } from '../components/common/CenteredModal';
 
 interface ToastContextType {
   showToast: (message: string, type: ToastType) => void;
+  showCenteredModal: (message: string, type: CenteredModalType) => void;
 }
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
@@ -25,20 +27,36 @@ interface ToastState {
   id: number;
 }
 
+interface CenteredModalState {
+  message: string;
+  type: CenteredModalType;
+  id: number;
+}
+
 export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   const [toasts, setToasts] = useState<ToastState[]>([]);
+  const [centeredModals, setCenteredModals] = useState<CenteredModalState[]>([]);
 
   const showToast = (message: string, type: ToastType) => {
     const id = Date.now();
     setToasts(prev => [...prev, { message, type, id }]);
   };
 
+  const showCenteredModal = (message: string, type: CenteredModalType) => {
+    const id = Date.now();
+    setCenteredModals(prev => [...prev, { message, type, id }]);
+  };
+
   const removeToast = (id: number) => {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
+  const removeCenteredModal = (id: number) => {
+    setCenteredModals(prev => prev.filter(modal => modal.id !== id));
+  };
+
   return (
-    <ToastContext.Provider value={{ showToast }}>
+    <ToastContext.Provider value={{ showToast, showCenteredModal }}>
       {children}
       {toasts.map((toast, index) => (
         <div 
@@ -52,6 +70,14 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
             onClose={() => removeToast(toast.id)}
           />
         </div>
+      ))}
+      {centeredModals.map((modal) => (
+        <CenteredModal
+          key={modal.id}
+          message={modal.message}
+          type={modal.type}
+          onClose={() => removeCenteredModal(modal.id)}
+        />
       ))}
     </ToastContext.Provider>
   );
