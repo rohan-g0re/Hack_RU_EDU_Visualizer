@@ -8,6 +8,8 @@ import { authenticateUser } from './middleware/auth.middleware';
 import { aiRateLimiter, generalRateLimiter } from './middleware/rateLimit.middleware';
 import healthRoutes from './routes/health.routes';
 import aiRoutes from './routes/ai.routes';
+import paymentsRoutes from './routes/payments.routes';
+import stripeWebhookRoutes from './routes/stripe.webhook';
 
 // Create Express app
 const app: Application = express();
@@ -31,6 +33,9 @@ app.use(
   })
 );
 
+// Stripe webhook route - MUST be before body parsers (needs raw body)
+app.use('/api/stripe/webhook', express.raw({ type: 'application/json' }), stripeWebhookRoutes);
+
 // Body parsing middleware
 app.use(express.json({ limit: '50mb' })); // Increased limit for PDF uploads
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
@@ -47,6 +52,9 @@ app.use(generalRateLimiter);
 
 // Health check route (no authentication required)
 app.use('/api/health', healthRoutes);
+
+// Payment routes (authentication required)
+app.use('/api/payments', authenticateUser, paymentsRoutes);
 
 // AI routes (authentication required + stricter rate limiting)
 app.use('/api/ai', authenticateUser, aiRateLimiter, aiRoutes);

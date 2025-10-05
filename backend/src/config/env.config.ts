@@ -16,6 +16,10 @@ interface EnvConfig {
     geminiApiKey: string;
     geminiModel: string;
   };
+  stripe: {
+    secretKey: string;
+    webhookSecret: string;
+  };
   cors: {
     origin: string | string[];
   };
@@ -42,6 +46,10 @@ export const config: EnvConfig = {
     geminiApiKey: getEnvVar('GEMINI_API_KEY'),
     // Default to a widely available model; can be overridden via GEMINI_MODEL
     geminiModel: process.env.GEMINI_MODEL || 'gemini-2.0-flash',
+  },
+  stripe: {
+    secretKey: getEnvVar('STRIPE_SECRET_KEY'),
+    webhookSecret: getEnvVar('STRIPE_WEBHOOK_SECRET'),
   },
   cors: {
     origin: process.env.CORS_ORIGIN?.split(',') || 'http://localhost:5173',
