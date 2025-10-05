@@ -41,7 +41,7 @@ function AppContent() {
   } = useConceptContext();
 
   const { user, signOut } = useAuth();
-  const { showToast } = useToast();
+  const { showToast, showCenteredModal } = useToast();
   
   // Payment modal state
   const [showPaymentModal, setShowPaymentModal] = useState(false);
@@ -108,7 +108,7 @@ function AppContent() {
       await signOut();
       // Redirect to landing page after logout
       setShowLandingPage(true);
-      showToast('Successfully logged out', 'success');
+      showCenteredModal('Successfully logged out!', 'success');
     } catch (error) {
       console.error('Logout error:', error);
       showToast('Failed to log out', 'error');
