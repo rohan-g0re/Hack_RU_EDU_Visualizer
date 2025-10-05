@@ -38,23 +38,6 @@
 - **💳 Credit System**: Stripe-powered pay-as-you-go and subscriptions
 
 ---
-
-## 🎬 Preview
-
-> Add your screenshots/gifs here to showcase the app
-
-<p align="center">
-  <img src="docs/screenshots/landing.png" width="800" alt="Landing Page"/>
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/visualize.png" width="800" alt="Visualization"/>
-</p>
-
-<p align="center">
-  <img src="docs/screenshots/voice.png" width="800" alt="Voice Assistant"/>
-</p>
-
 ---
 
 ## 🧰 Tech Stack
@@ -248,7 +231,6 @@ All `/api/ai/*` routes require `Authorization: Bearer <jwt>` header.
 
 | Method | Endpoint | Description | Auth Required |
 |--------|----------|-------------|---------------|
-| `GET` | `/health` | Service health check | ❌ |
 | `POST` | `/ai/generate-svg` | Generate SVG visualization | ✅ |
 | `POST` | `/ai/extract-concepts` | Extract concepts from text | ✅ |
 | `POST` | `/ai/extract-concepts-with-ranges` | Extract concepts with positions | ✅ |
@@ -256,7 +238,6 @@ All `/api/ai/*` routes require `Authorization: Bearer <jwt>` header.
 | `POST` | `/ai/extract-pdf-text` | Extract text from PDF | ✅ |
 | `POST` | `/ai/answer-question` | Answer question with context | ✅ |
 | `POST` | `/payments/create-checkout` | Create Stripe checkout session | ✅ |
-| `POST` | `/stripe/webhook` | Handle Stripe webhooks | ❌ |
 
 ### Example Request
 
@@ -354,7 +335,7 @@ flowchart LR
 
 | Plan | Credits | Price |
 |------|---------|-------|
-| **Starter** | 10 credits | Free on signup |
+| **Starter** | 5 credits | Free on signup |
 | **Pay-as-you-go** | 5 credits | $5 one-time |
 | **Subscription** | 100 credits/month | $20/month |
 
@@ -388,19 +369,6 @@ Ask questions about your document using voice commands. The AI maintains convers
 - API keys stored securely on backend
 
 ---
-
-## 🗺️ Roadmap
-
-- [ ] Visualization template gallery
-- [ ] Custom color themes
-- [ ] Export to PNG/PDF
-- [ ] Shareable visualization links
-- [ ] Collaborative annotations
-- [ ] Support for more AI models
-- [ ] Real-time collaboration
-- [ ] Accessibility improvements
-- [ ] Internationalization (i18n)
-
 ---
 
 ## 🤝 Contributing
@@ -476,21 +444,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-## 📞 Support
-
-- 🐛 **Issues**: [Create an issue](https://github.com/your-username/your-repo/issues)
-- 💬 **Discussions**: [Join the discussion](https://github.com/your-username/your-repo/discussions)
-- 📧 **Email**: support@vizkidd.com
-
----
-
 <p align="center">
   <strong>If you like this project, consider ⭐ starring it and sharing with a friend!</strong>
   <br/>
   <sub>Built with ❤️ for better education through visualization.</sub>
 </p>
-
-<p align="center">
-  Made with 💙 by <a href="https://github.com/your-username">Your Team Name</a>
 </p>
 ```
