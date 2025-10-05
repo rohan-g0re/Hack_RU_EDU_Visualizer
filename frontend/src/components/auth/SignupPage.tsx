@@ -71,7 +71,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
   if (showSuccess) {
     return (
       <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-        <div className="bg-[#112240] rounded-2xl shadow-2xl border border-green-500/30 max-w-md w-full p-8 animate-fadeIn">
+        <div className="relative bg-[#112240] rounded-2xl shadow-2xl border border-green-500/30 max-w-md w-full p-8 animate-fadeIn">
           <div className="text-center">
             <div className="mx-auto w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
               <CheckCircle className="h-10 w-10 text-green-400" />
@@ -94,7 +94,7 @@ const SignupPage: React.FC<SignupPageProps> = ({ onSwitchToLogin, onClose }) => 
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-[#112240] rounded-2xl shadow-2xl border border-blue-800/30 max-w-md w-full p-8 my-8 animate-fadeIn">
+      <div className="relative bg-[#112240] rounded-2xl shadow-2xl border border-blue-800/30 max-w-md w-full p-8 my-8 animate-fadeIn">
         {/* Header */}
         <div className="flex items-center justify-center mb-8">
           <Brain className="h-10 w-10 text-[#38BDF8] mr-3" />

@@ -22,37 +22,52 @@ const Toast: React.FC<ToastProps> = ({ message, type, onClose, duration = 4000 }
   const getIcon = () => {
     switch (type) {
       case 'success':
-        return <CheckCircle className="h-5 w-5 text-green-400" />;
+        return <CheckCircle className="h-6 w-6 text-green-400 flex-shrink-0" />;
       case 'error':
-        return <XCircle className="h-5 w-5 text-red-400" />;
+        return <XCircle className="h-6 w-6 text-red-400 flex-shrink-0" />;
       case 'info':
-        return <AlertCircle className="h-5 w-5 text-blue-400" />;
+        return <AlertCircle className="h-6 w-6 text-blue-400 flex-shrink-0" />;
     }
   };
 
   const getStyles = () => {
     switch (type) {
       case 'success':
-        return 'bg-green-900/20 border-green-500/30';
+        return 'bg-green-900/40 border-green-500/50 shadow-green-500/20';
       case 'error':
-        return 'bg-red-900/20 border-red-500/30';
+        return 'bg-red-900/40 border-red-500/50 shadow-red-500/20';
       case 'info':
-        return 'bg-blue-900/20 border-blue-500/30';
+        return 'bg-blue-900/40 border-blue-500/50 shadow-blue-500/20';
+    }
+  };
+
+  const getTextColor = () => {
+    switch (type) {
+      case 'success':
+        return 'text-green-50';
+      case 'error':
+        return 'text-red-50';
+      case 'info':
+        return 'text-blue-50';
     }
   };
 
   return (
-    <div className={`fixed top-4 right-4 z-[100] max-w-md animate-slideDown`}>
-      <div className={`${getStyles()} border rounded-lg p-4 shadow-2xl backdrop-blur-sm flex items-start gap-3`}>
-        {getIcon()}
-        <p className="text-white text-sm flex-1">{message}</p>
-        <button
-          onClick={onClose}
-          className="text-gray-400 hover:text-white transition-colors"
-        >
-          <X className="h-4 w-4" />
-        </button>
-      </div>
+    <div 
+      className={`${getStyles()} ${getTextColor()} border-2 rounded-xl p-5 shadow-2xl backdrop-blur-md flex items-center gap-4 min-w-[400px] max-w-[600px] animate-slideDown`}
+      role="alert"
+      aria-live="assertive"
+      aria-atomic="true"
+    >
+      {getIcon()}
+      <p className="text-base font-medium flex-1 leading-relaxed">{message}</p>
+      <button
+        onClick={onClose}
+        className="text-gray-300 hover:text-white transition-colors flex-shrink-0 p-1 hover:bg-white/10 rounded-lg"
+        aria-label="Close notification"
+      >
+        <X className="h-5 w-5" />
+      </button>
     </div>
   );
 };

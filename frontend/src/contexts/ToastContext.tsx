@@ -58,19 +58,21 @@ export const ToastProvider: React.FC<ToastProviderProps> = ({ children }) => {
   return (
     <ToastContext.Provider value={{ showToast, showCenteredModal }}>
       {children}
-      {toasts.map((toast, index) => (
-        <div 
-          key={toast.id} 
-          style={{ top: `${1 + index * 5}rem` }}
-          className="fixed right-4 z-[100]"
-        >
-          <Toast
-            message={toast.message}
-            type={toast.type}
-            onClose={() => removeToast(toast.id)}
-          />
-        </div>
-      ))}
+      {/* Toast container - centered at top */}
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-3 pointer-events-none">
+        {toasts.map((toast) => (
+          <div 
+            key={toast.id} 
+            className="pointer-events-auto"
+          >
+            <Toast
+              message={toast.message}
+              type={toast.type}
+              onClose={() => removeToast(toast.id)}
+            />
+          </div>
+        ))}
+      </div>
       {centeredModals.map((modal) => (
         <CenteredModal
           key={modal.id}

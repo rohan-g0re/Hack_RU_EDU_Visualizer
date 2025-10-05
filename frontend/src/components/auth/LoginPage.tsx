@@ -54,7 +54,7 @@ const LoginPage: React.FC<LoginPageProps> = ({ onSwitchToSignup, onClose }) => {
 
   return (
     <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-      <div className="bg-[#112240] rounded-2xl shadow-2xl border border-blue-800/30 max-w-md w-full p-8 animate-fadeIn">
+      <div className="relative bg-[#112240] rounded-2xl shadow-2xl border border-blue-800/30 max-w-md w-full p-8 animate-fadeIn">
         {/* Header */}
         <div className="flex items-center justify-center mb-8">
           <Brain className="h-10 w-10 text-[#38BDF8] mr-3" />
