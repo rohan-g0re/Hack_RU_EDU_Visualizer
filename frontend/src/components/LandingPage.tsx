@@ -25,7 +25,6 @@ const LandingPage: React.FC<LandingPageProps> = ({
   const secondSectionRef = useRef<HTMLDivElement>(null);
   const heroSectionRef = useRef<HTMLDivElement>(null);
   const resultsSectionRef = useRef<HTMLDivElement>(null);
-  const [activeSlide, setActiveSlide] = useState(0);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   
   // Handle scroll event to track scroll position
@@ -362,31 +361,6 @@ const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
           
-          <div 
-            className="flex justify-center mt-16 opacity-0 transform translate-y-10 transition duration-1000"
-            style={{ 
-              opacity: scrollY > 500 ? 1 : 0, 
-              transform: scrollY > 500 ? 'translateY(0)' : 'translateY(10px)' 
-            }}
-          >
-            <div className="flex items-center gap-4">
-              <button 
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSlide === 0 ? 'bg-gray-400 scale-110' : 'bg-gray-600 hover:bg-gray-500'}`}
-                onClick={() => setActiveSlide(0)}
-                aria-label="Go to slide 1"
-              ></button>
-              <button 
-                className={`w-6 h-3 rounded-full transition-all duration-300 ${activeSlide === 1 ? 'bg-blue-500 scale-110' : 'bg-gray-600 hover:bg-gray-500'}`}
-                onClick={() => setActiveSlide(1)}
-                aria-label="Go to slide 2"
-              ></button>
-              <button 
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${activeSlide === 2 ? 'bg-gray-400 scale-110' : 'bg-gray-600 hover:bg-gray-500'}`}
-                onClick={() => setActiveSlide(2)}
-                aria-label="Go to slide 3"
-              ></button>
-            </div>
-          </div>
         </section>
       </div>
 
