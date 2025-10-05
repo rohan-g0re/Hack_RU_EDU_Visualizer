@@ -5,6 +5,7 @@ import backgroundImage from '../assets/landing_page_background.jpg';
 import text1Image from '../assets/text1_Image.png';
 import text2Image from '../assets/text2_Image.png';
 import text3Image from '../assets/text3_Image.png';
+import PixelCard from './PixelCard';
 
 interface LandingPageProps {
   onVisualizeClick: () => void;
@@ -218,138 +219,144 @@ const LandingPage: React.FC<LandingPageProps> = ({
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Concept Mapping Card */}
             <div 
-              className="bg-[#151B29] border border-[#2A3247] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.03] hover:border-blue-400/30 opacity-0 transform translate-y-10 group flex flex-col h-[500px]"
+              className="opacity-0 transform translate-y-10"
               style={{ 
                 opacity: scrollY > 400 ? 1 : 0, 
                 transform: scrollY > 400 ? 'translateY(0)' : 'translateY(10px)',
                 transitionDelay: '100ms' 
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="p-6 relative z-10 flex flex-col flex-grow">
-                <div className="absolute top-0 right-0 h-20 w-20 bg-blue-500/10 rounded-full blur-2xl group-hover:bg-blue-500/20 transition-all duration-700 -translate-y-10 translate-x-10 group-hover:translate-y-0 group-hover:translate-x-5"></div>
-                <h3 className="text-2xl font-semibold mb-4 group-hover:text-blue-300 transition-colors duration-300">Concept Mapping</h3>
-                <p className="text-gray-400 mb-8 group-hover:text-gray-300 transition-colors duration-300">
-                  Intelligent extraction of key technical concepts, visualized through adaptive formats—from flowcharts to neural networks —tailored to your content's complexity.
-                </p>
-                
-                <div className="rounded-xl border border-[#2A3247] overflow-hidden group-hover:border-blue-400/20 transition-all duration-300 mt-auto">
-                  <div className="bg-[#0D1320] p-2 flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="text-gray-400 text-xs ml-2">Visualization</span>
-                  </div>
-                  <div className="bg-[#0A0E17] p-4 relative overflow-hidden">
-                    <div className="text-white text-sm">Conceptualizing Data...</div>
-                    <div className="mt-4 text-gray-300 text-sm">
-                      <div className="text-blue-300 mb-2">Network graph generated:</div>
-                      <div className="h-24 bg-[#101624] rounded-lg flex items-center justify-center overflow-hidden">
-                        <div className="relative h-full w-full">
-                          <div className="absolute h-3 w-3 bg-blue-400 rounded-full top-1/4 left-1/4 animate-pulse"></div>
-                          <div className="absolute h-2 w-2 bg-purple-400 rounded-full top-1/2 left-1/3 animate-pulse" style={{animationDelay: '300ms'}}></div>
-                          <div className="absolute h-4 w-4 bg-indigo-400 rounded-full bottom-1/4 right-1/4 animate-pulse" style={{animationDelay: '600ms'}}></div>
-                          <div className="absolute h-2 w-2 bg-cyan-400 rounded-full top-1/3 right-1/3 animate-pulse" style={{animationDelay: '900ms'}}></div>
-                          <div className="absolute top-1/4 left-1/4 h-0.5 w-16 bg-blue-400/30 rotate-12 transform origin-left"></div>
-                          <div className="absolute top-1/3 right-1/3 h-0.5 w-12 bg-cyan-400/30 -rotate-45 transform origin-right"></div>
-                          <div className="absolute bottom-1/4 right-1/4 h-0.5 w-14 bg-indigo-400/30 rotate-45 transform origin-right"></div>
+              <PixelCard variant="blue" className="h-[500px] w-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 p-6 z-10 flex flex-col">
+                  <div className="absolute top-0 right-0 h-20 w-20 bg-blue-500/10 rounded-full blur-2xl hover:bg-blue-500/20 transition-all duration-700 -translate-y-10 translate-x-10 hover:translate-y-0 hover:translate-x-5"></div>
+                  <h3 className="text-2xl font-semibold mb-4 hover:text-blue-300 transition-colors duration-300">Concept Mapping</h3>
+                  <p className="text-gray-400 mb-8 hover:text-gray-300 transition-colors duration-300">
+                    Intelligent extraction of key technical concepts, visualized through adaptive formats—from flowcharts to neural networks —tailored to your content's complexity.
+                  </p>
+                  
+                  <div className="rounded-xl border border-[#2A3247] overflow-hidden hover:border-blue-400/20 transition-all duration-300 mt-auto">
+                    <div className="bg-[#0D1320] p-2 flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <span className="text-gray-400 text-xs ml-2">Visualization</span>
+                    </div>
+                    <div className="bg-[#0A0E17] p-4 relative overflow-hidden">
+                      <div className="text-white text-sm">Conceptualizing Data...</div>
+                      <div className="mt-4 text-gray-300 text-sm">
+                        <div className="text-blue-300 mb-2">Network graph generated:</div>
+                        <div className="h-24 bg-[#101624] rounded-lg flex items-center justify-center overflow-hidden">
+                          <div className="relative h-full w-full">
+                            <div className="absolute h-3 w-3 bg-blue-400 rounded-full top-1/4 left-1/4 animate-pulse"></div>
+                            <div className="absolute h-2 w-2 bg-purple-400 rounded-full top-1/2 left-1/3 animate-pulse" style={{animationDelay: '300ms'}}></div>
+                            <div className="absolute h-4 w-4 bg-indigo-400 rounded-full bottom-1/4 right-1/4 animate-pulse" style={{animationDelay: '600ms'}}></div>
+                            <div className="absolute h-2 w-2 bg-cyan-400 rounded-full top-1/3 right-1/3 animate-pulse" style={{animationDelay: '900ms'}}></div>
+                            <div className="absolute top-1/4 left-1/4 h-0.5 w-16 bg-blue-400/30 rotate-12 transform origin-left"></div>
+                            <div className="absolute top-1/3 right-1/3 h-0.5 w-12 bg-cyan-400/30 -rotate-45 transform origin-right"></div>
+                            <div className="absolute bottom-1/4 right-1/4 h-0.5 w-14 bg-indigo-400/30 rotate-45 transform origin-right"></div>
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </PixelCard>
             </div>
             
             {/* AI Analysis Card */}
             <div 
-              className="bg-[#151B29] border border-[#2A3247] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.03] hover:border-emerald-400/30 opacity-0 transform translate-y-10 group flex flex-col h-[500px]"
+              className="opacity-0 transform translate-y-10"
               style={{ 
                 opacity: scrollY > 400 ? 1 : 0, 
                 transform: scrollY > 400 ? 'translateY(0)' : 'translateY(10px)',
                 transitionDelay: '300ms' 
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="p-6 relative z-10 flex flex-col flex-grow">
-                <div className="absolute top-0 right-0 h-20 w-20 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-all duration-700 -translate-y-10 translate-x-10 group-hover:translate-y-0 group-hover:translate-x-5"></div>
-                <h3 className="text-2xl font-semibold mb-4 group-hover:text-emerald-300 transition-colors duration-300">Intricate Visualizations</h3>
-                <p className="text-gray-400 mb-8 group-hover:text-gray-300 transition-colors duration-300">
-                Watch as our advanced AI transforms technical jargon into clear, beautiful visualizations in seconds.
-                </p>
-                
-                <div className="rounded-xl border border-[#2A3247] overflow-hidden group-hover:border-emerald-400/20 transition-all duration-300 mt-auto">
-                  <div className="bg-[#0D1320] p-4">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
-                      <span className="text-emerald-400 text-sm">Processing...</span>
-                    </div>
-                    <div className="bg-[#0A0E17] p-4 rounded-lg font-mono text-xs relative overflow-hidden">
-                      <div className="text-emerald-300">AI model initializing...</div>
-                      <div className="text-gray-400 mt-2">Extracting semantic context</div>
-                      <div className="h-12 mt-2 overflow-hidden relative">
-                        <div className="absolute left-0 w-full whitespace-nowrap animate-marquee">
-                          <span className="text-emerald-300 mr-2">|</span>
-                          <span className="text-blue-300 mr-2">analyzing text structure</span>
-                          <span className="text-emerald-300 mr-2">|</span>
-                          <span className="text-purple-300 mr-2">identifying key entities</span>
-                          <span className="text-emerald-300 mr-2">|</span>
-                          <span className="text-cyan-300 mr-2">mapping relationships</span>
-                          <span className="text-emerald-300 mr-2">|</span>
-                          <span className="text-yellow-300 mr-2">generating visual schema</span>
-                        </div>
+              <PixelCard variant="yellow" className="h-[500px] w-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/10 to-blue-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 p-6 z-10 flex flex-col">
+                  <div className="absolute top-0 right-0 h-20 w-20 bg-emerald-500/10 rounded-full blur-2xl hover:bg-emerald-500/20 transition-all duration-700 -translate-y-10 translate-x-10 hover:translate-y-0 hover:translate-x-5"></div>
+                  <h3 className="text-2xl font-semibold mb-4 hover:text-emerald-300 transition-colors duration-300">Intricate Visualizations</h3>
+                  <p className="text-gray-400 mb-8 hover:text-gray-300 transition-colors duration-300">
+                  Watch as our advanced AI transforms technical jargon into clear, beautiful visualizations in seconds.
+                  </p>
+                  
+                  <div className="rounded-xl border border-[#2A3247] overflow-hidden hover:border-emerald-400/20 transition-all duration-300 mt-auto">
+                    <div className="bg-[#0D1320] p-4">
+                      <div className="flex items-center gap-2 mb-4">
+                        <div className="w-3 h-3 rounded-full bg-emerald-500"></div>
+                        <span className="text-emerald-400 text-sm">Processing...</span>
                       </div>
-                      <div className="mt-2 w-full bg-gray-800 rounded-full h-1.5">
-                        <div className="bg-emerald-500 h-1.5 rounded-full animate-progress"></div>
+                      <div className="bg-[#0A0E17] p-4 rounded-lg font-mono text-xs relative overflow-hidden">
+                        <div className="text-emerald-300">AI model initializing...</div>
+                        <div className="text-gray-400 mt-2">Extracting semantic context</div>
+                        <div className="h-12 mt-2 overflow-hidden relative">
+                          <div className="absolute left-0 w-full whitespace-nowrap animate-marquee">
+                            <span className="text-emerald-300 mr-2">|</span>
+                            <span className="text-blue-300 mr-2">analyzing text structure</span>
+                            <span className="text-emerald-300 mr-2">|</span>
+                            <span className="text-purple-300 mr-2">identifying key entities</span>
+                            <span className="text-emerald-300 mr-2">|</span>
+                            <span className="text-cyan-300 mr-2">mapping relationships</span>
+                            <span className="text-emerald-300 mr-2">|</span>
+                            <span className="text-yellow-300 mr-2">generating visual schema</span>
+                          </div>
+                        </div>
+                        <div className="mt-2 w-full bg-gray-800 rounded-full h-1.5">
+                          <div className="bg-emerald-500 h-1.5 rounded-full animate-progress"></div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </PixelCard>
             </div>
             
             {/* Interactive Exploration Card */}
             <div 
-              className="bg-[#151B29] border border-[#2A3247] rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-xl hover:scale-[1.03] hover:border-purple-400/30 opacity-0 transform translate-y-10 group flex flex-col h-[500px]"
+              className="opacity-0 transform translate-y-10"
               style={{ 
                 opacity: scrollY > 400 ? 1 : 0, 
                 transform: scrollY > 400 ? 'translateY(0)' : 'translateY(10px)',
                 transitionDelay: '500ms' 
               }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              <div className="p-6 relative z-10 flex flex-col flex-grow">
-                <div className="absolute top-0 right-0 h-20 w-20 bg-purple-500/10 rounded-full blur-2xl group-hover:bg-purple-500/20 transition-all duration-700 -translate-y-10 translate-x-10 group-hover:translate-y-0 group-hover:translate-x-5"></div>
-                <h3 className="text-2xl font-semibold mb-4 group-hover:text-purple-300 transition-colors duration-300">AI Assistant</h3>
-                <p className="text-gray-400 mb-8 group-hover:text-gray-300 transition-colors duration-300">
-                  Engage with our intelligent assistant that guides you through your visualizations, answers questions, and helps uncover deeper insights in your data.
-                </p>
-                
-                <div className="rounded-xl border border-[#2A3247] overflow-hidden group-hover:border-purple-400/20 transition-all duration-300 mt-auto">
-                  <div className="bg-[#0D1320] p-2 flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <span className="text-gray-400 text-xs ml-2">Assistant</span>
-                  </div>
-                  <div className="bg-[#0A0E17] p-4 relative overflow-hidden">
-                    <div className="text-white text-sm flex items-center">
-                      <span className="text-purple-300 mr-2">AI Assistant:</span> 
-                      <span className="text-white/70 text-xs">Ready to help</span>
+              <PixelCard variant="pink" className="h-[500px] w-full">
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/10 to-indigo-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 p-6 z-10 flex flex-col">
+                  <div className="absolute top-0 right-0 h-20 w-20 bg-purple-500/10 rounded-full blur-2xl hover:bg-purple-500/20 transition-all duration-700 -translate-y-10 translate-x-10 hover:translate-y-0 hover:translate-x-5"></div>
+                  <h3 className="text-2xl font-semibold mb-4 hover:text-purple-300 transition-colors duration-300">AI Assistant</h3>
+                  <p className="text-gray-400 mb-8 hover:text-gray-300 transition-colors duration-300">
+                    Engage with our intelligent assistant that guides you through your visualizations, answers questions, and helps uncover deeper insights in your data.
+                  </p>
+                  
+                  <div className="rounded-xl border border-[#2A3247] overflow-hidden hover:border-purple-400/20 transition-all duration-300 mt-auto">
+                    <div className="bg-[#0D1320] p-2 flex items-center gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                      <span className="text-gray-400 text-xs ml-2">Assistant</span>
                     </div>
-                    <div className="mt-4 relative">
-                      <div className="h-24 bg-[#101624] rounded-lg p-3 overflow-hidden">
-                        <div className="flex items-start gap-2">
-                          <div className="w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <div className="w-2 h-2 rounded-full bg-purple-400"></div>
-                          </div>
-                          <div>
-                            <div className="text-xs text-white/80">How can I help analyze your visualization?</div>
-                            <div className="mt-2 text-xs text-gray-400">Try asking about key concepts or relationships...</div>
-                            <div className="mt-3 flex items-center">
-                              <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse"></div>
-                              <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse ml-1" style={{animationDelay: '300ms'}}></div>
-                              <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse ml-1" style={{animationDelay: '600ms'}}></div>
+                    <div className="bg-[#0A0E17] p-4 relative overflow-hidden">
+                      <div className="text-white text-sm flex items-center">
+                        <span className="text-purple-300 mr-2">AI Assistant:</span> 
+                        <span className="text-white/70 text-xs">Ready to help</span>
+                      </div>
+                      <div className="mt-4 relative">
+                        <div className="h-24 bg-[#101624] rounded-lg p-3 overflow-hidden">
+                          <div className="flex items-start gap-2">
+                            <div className="w-5 h-5 rounded-full bg-purple-500/30 flex items-center justify-center flex-shrink-0 mt-0.5">
+                              <div className="w-2 h-2 rounded-full bg-purple-400"></div>
+                            </div>
+                            <div>
+                              <div className="text-xs text-white/80">How can I help analyze your visualization?</div>
+                              <div className="mt-2 text-xs text-gray-400">Try asking about key concepts or relationships...</div>
+                              <div className="mt-3 flex items-center">
+                                <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse"></div>
+                                <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse ml-1" style={{animationDelay: '300ms'}}></div>
+                                <div className="h-1 w-1 bg-purple-400 rounded-full animate-pulse ml-1" style={{animationDelay: '600ms'}}></div>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -357,7 +364,7 @@ const LandingPage: React.FC<LandingPageProps> = ({
                     </div>
                   </div>
                 </div>
-              </div>
+              </PixelCard>
             </div>
           </div>
           
