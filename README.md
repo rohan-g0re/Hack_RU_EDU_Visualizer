@@ -12,7 +12,7 @@
 </p>
 
 <p align="center">
-  <a href="https://your-netlify-site.netlify.app">
+  <a href="https://vizkidd.netlify.app/">
     <img src="https://img.shields.io/badge/🚀 Live%20Demo-Open-success?style=for-the-badge" alt="Live Demo" />
   </a>
   <a href="https://your-render-service.onrender.com/api/health">
@@ -27,6 +27,8 @@
 </p>
 
 ---
+
+## We are live at: https://vizkidd.netlify.app/
 
 ## ✨ Features
 
